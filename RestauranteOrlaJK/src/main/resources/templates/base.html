@@ -11,18 +11,36 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link"
-						th:href="@{/recepcao}">Recepção</a></li>
-					<li class="nav-item"><a class="nav-link" th:href="@{/mesas}">Mesas</a></li>
-					<li class="nav-item"><a class="nav-link" th:href="@{/cozinha}">Cozinha</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" th:href="@{/caixa}">Caixa</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" th:href="@{/estoque}">Estoque</a>
-					</li>
-					<li class="nav-item"><a class="nav-link"
-						th:href="@{/administracao}">Administracao</a></li>
+					<div sec:authorize="hasAuthority('RECEPCAO')">
+						<li class="nav-item"><a class="nav-link"
+							th:href="@{/recepcao}">Recepção</a></li>
+					</div>
+					<div sec:authorize="hasAuthority('MESAS')">
+						<li class="nav-item"><a class="nav-link" th:href="@{/mesas}">Mesas</a></li>
+					</div>
+					<div sec:authorize="hasAuthority('COZINHA')">
+						<li class="nav-item"><a class="nav-link"
+							th:href="@{/cozinha}">Cozinha</a></li>
+					</div>
+					<div sec:authorize="hasAuthority('CAIXA')">
+						<li class="nav-item"><a class="nav-link" th:href="@{/caixa}">Caixa</a></li>
+					</div>
+					<div sec:authorize="hasAuthority('ESTOQUE')">
+						<li class="nav-item"><a class="nav-link"
+							th:href="@{/estoque}">Estoque</a></li>
+					</div>
+					<div sec:authorize="hasAuthority('ADMINISTRACAO')">
+						<li class="nav-item"><a class="nav-link"
+							th:href="@{/administracao}">Administracao</a></li>
+					</div>
 				</ul>
+
+			</div>
+			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+				<form th:action="@{/logout}" method="post">
+					<input type="submit" class="btn btn-outline-secondary"
+						value="Sair do sistema"></input>
+				</form>
 			</div>
 		</div>
 	</nav>
@@ -33,9 +51,13 @@
 <div th:fragment="menuAdm">
 
 	<div class="btn-group" role="group" aria-label="Menu do administrativo">
-		<a type="button" class="btn btn-outline-primary" href="/administracao/cardapio">Cardápio</a> 
-		<a type="button" class="btn btn-outline-primary" href="/administracao/mesas">Mesas</a>
-		<a type="button" class="btn btn-outline-primary" href="/administracao/registro">Registro</a>
+		<a type="button" class="btn btn-outline-primary"
+			href="/administracao/cardapio">Cardápio</a> <a type="button"
+			class="btn btn-outline-primary" href="/administracao/mesas">Mesas</a>
+		<a type="button" class="btn btn-outline-primary"
+			href="/administracao/usuarios">Usuarios</a> <a type="button"
+			class="btn btn-outline-primary" href="/administracao/registro">Registro</a>
+
 	</div>
 
 </div>

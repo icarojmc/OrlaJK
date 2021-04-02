@@ -2,35 +2,33 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Administração</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
 	crossorigin="anonymous">
+<title>Página inicial</title>
 </head>
 <body>
+
 	<div th:replace="~{base :: menu}"></div>
 
-	<div class="container">
-		<div class="row">
-			<h1 class="col-8">Cadastros administrativos:</h1>
 
-			<div class="mb-4 mt-2 col-4 d-grid">
-				<a href="/administracao/fecharestaurante"
-					class="btn btn-outline-primary me-md-2" type="button">Fechar
-					restaurante</a>
-			</div>
-		</div>
 
-		<div th:replace="~{base :: menuAdm}"></div>
+	<p>
+		<span sec:authentication="name">Bob</span>
+	</p>
+	<p>
+		Roles: <span sec:authentication="principal.authorities">[ROLE_USER,
+			ROLE_ADMIN]</span>
+	</p>
+
+	<div sec:authorize="hasAuthority('MESAS')">Sec:authorize funcionou!</div>
+	<div
+		th:if="${#strings.contains(#authentication.principal.authorities,'ADMINISTRACAO')}">
+		<p>Funcionou!</p>
 	</div>
-
-
-
-
-
-
 
 
 
