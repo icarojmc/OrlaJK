@@ -70,9 +70,13 @@ public class UsuariosControler {
 	public String editadoUsuario(Model model, EditaUsuarioDTO usuarioDTO) {
 		
 		Usuario usuario = usuarioRepository.findById(Long.parseLong(usuarioDTO.getId())).get();
+		
+		List<Perfil> perfis = usuario.getPerfis();
+		
 		usuario = usuarioDTO.toUsuario(usuario);
 		perfilRepository.saveAll(usuario.getPerfis());
 		usuarioRepository.save(usuario);
+		perfilRepository.deleteAll(perfis);
 		
 		List<Usuario> usuarios = usuarioRepository.findAll();
 		model.addAttribute("usuarios", usuarios);

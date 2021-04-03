@@ -18,7 +18,6 @@ public class Perfil implements GrantedAuthority {
 	
 	@Override
 	public String getAuthority() {
-		// TODO Auto-generated method stub
 		return this.nome;
 	}
 	
@@ -35,11 +34,7 @@ public class Perfil implements GrantedAuthority {
 		this.nome = nome;
 	}
 
-//	@Override
-//	public String toString() {
-//		// TODO Auto-generated method stub
-//		return "ROLE_" + this.nome;
-//	}
+
 	
 	
 

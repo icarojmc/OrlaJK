@@ -85,6 +85,7 @@ public class RecepcaoController {
 		mesa.setFechada(false);
 		mesa.setOcupada(false);
 		mesa.setTotalDaConta(new BigDecimal("0.0"));
+		mesa.setClienteOcupante(null);
 		mesaRepository.save(mesa);
 
 		List<Mesa> mesas = mesaRepository.findAll();
@@ -122,6 +123,30 @@ public class RecepcaoController {
 
 		listaDeEsperaRepository.deleteById(Long.parseLong(id));
 
+		List<Mesa> mesas = mesaRepository.findAll();
+		List<ListaDeEspera> lista = listaDeEsperaRepository.findAll();
+		model.addAttribute("mesas", mesas);
+		model.addAttribute("lista", lista);
+
+		return "recepcao/home";
+	}
+	
+	@GetMapping("/ocupa")
+	public String ocupaMesa(Model model, @RequestParam String mesaid, @RequestParam String clienteid) {
+		
+		Mesa mesa = mesaRepository.findById(Long.parseLong(mesaid)).get();
+		mesa.setOcupada(true);
+		mesa.setFechada(false);
+		mesa.setChegada(LocalTime.now());
+		
+		ListaDeEspera clienteEmEspera = listaDeEsperaRepository.findById(Long.parseLong(clienteid)).get();
+		
+		mesa.setClienteOcupante(clienteEmEspera.getCliente());
+		
+		mesaRepository.save(mesa);
+		
+		listaDeEsperaRepository.delete(clienteEmEspera);;
+		
 		List<Mesa> mesas = mesaRepository.findAll();
 		List<ListaDeEspera> lista = listaDeEsperaRepository.findAll();
 		model.addAttribute("mesas", mesas);

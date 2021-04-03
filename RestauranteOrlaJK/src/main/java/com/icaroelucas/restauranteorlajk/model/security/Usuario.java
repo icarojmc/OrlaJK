@@ -121,7 +121,12 @@ public class Usuario implements UserDetails {
 
 	public void apagaPerfis() {
 		
-		this.perfis.clear();
+		this.perfis = new ArrayList<>();
+	}
+
+	@Override
+	public String toString() {
+		return this.nome;
 	}
 	
 	

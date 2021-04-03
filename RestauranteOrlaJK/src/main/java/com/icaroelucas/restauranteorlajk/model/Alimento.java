@@ -1,6 +1,7 @@
 package com.icaroelucas.restauranteorlajk.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -28,8 +29,13 @@ public class Alimento {
 	private List<Produto> produtos;
 	
 	@ManyToMany(mappedBy = "alimentos")
-	private List<Pedido> pedidos;
+	private List<Pedido> pedidos = new ArrayList<>();
 
+	public void adicionaProduto(Produto produto) {
+		
+		this.produtos.add(produto);
+	}
+	
 	public long getId() {
 		return id;
 	}
@@ -68,6 +74,20 @@ public class Alimento {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
+	}
+
+	public void removeProduto(Produto produto) {
+		
+		produtos.remove(produto);
+		
 	}
 
 	

@@ -23,6 +23,7 @@ public class NovoProdutoDTO {
 		produto.setQuantidade(Integer.parseInt(quantidade));
 		produto.setValidade(data);
 		produto.setMedida(Medida.valueOf(medida));
+		produto.setDisponivel(true);
 		
 		return produto;
 	}

@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.icaroelucas.restauranteorlajk.dto.EditadoAlimentoDTO;
 import com.icaroelucas.restauranteorlajk.dto.NovoAlimentoDTO;
+import com.icaroelucas.restauranteorlajk.dto.produtoAdicionadoAoCardapioDTO;
 import com.icaroelucas.restauranteorlajk.model.Alimento;
+import com.icaroelucas.restauranteorlajk.model.Produto;
 import com.icaroelucas.restauranteorlajk.repository.AlimentoRepository;
+import com.icaroelucas.restauranteorlajk.repository.ProdutoRepository;
 
 @Controller
 @RequestMapping("/administracao/cardapio")
@@ -21,6 +24,9 @@ public class CardapioController {
 
 	@Autowired
 	AlimentoRepository alimentoRepository;
+	
+	@Autowired
+	ProdutoRepository produtoRepository;
 	
 	@GetMapping("")
 	public String cardapio(Model model) {
@@ -80,4 +86,42 @@ public class CardapioController {
 		return "administracao/cardapio/cardapio";
 	}
 	
+	@GetMapping("/adicionaproduto")
+	public String adicionaProduto(Model model, @RequestParam String id) {
+
+		model.addAttribute("id", id);
+		
+		return "administracao/cardapio/adicionaproduto";
+	}
+	
+	@PostMapping("/adicionaproduto")
+	public String adicionadoProduto(Model model, produtoAdicionadoAoCardapioDTO produto) {
+
+		Alimento alimento = alimentoRepository.findById(Long.parseLong(produto.getId())).get();
+		alimento.adicionaProduto(produto.toProduto());
+		
+		produtoRepository.saveAll(alimento.getProdutos());
+		alimentoRepository.save(alimento);
+		
+		List<Alimento> alimentos = alimentoRepository.findAll();
+		model.addAttribute("alimentos", alimentos);
+
+		return "administracao/cardapio/cardapio";
+	}
+	
+	@GetMapping("/removeproduto")
+	public String removeProduto(Model model, @RequestParam String alimentoid, @RequestParam String produtoid) {
+		
+		Alimento alimento = alimentoRepository.findById(Long.parseLong(alimentoid)).get();
+		Produto produto = produtoRepository.findById(Long.parseLong(produtoid)).get();
+		alimento.removeProduto(produto);
+		
+		alimentoRepository.save(alimento);
+		produtoRepository.delete(produto);
+		
+		List<Alimento> alimentos = alimentoRepository.findAll();
+		model.addAttribute("alimentos", alimentos);
+
+		return "administracao/cardapio/cardapio";
+	}
 }

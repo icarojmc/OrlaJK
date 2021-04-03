@@ -13,11 +13,12 @@
 	<div th:replace="~{base :: menu}"></div>
 
 	<div class="container">
-	
+
 		<div th:replace="~{base :: menuAdm}"></div>
 		<h1 class="mt-2 mb-2">Editar cardápio:</h1>
-		<a type="button" class="btn btn-outline-primary mb-2" href="/administracao/cardapio/novo">Novo alimento</a>
-		
+		<a type="button" class="btn btn-outline-primary mb-2"
+			href="/administracao/cardapio/novo">Novo alimento</a>
+
 		<table class="table">
 			<thead>
 				<tr>
@@ -37,7 +38,16 @@
 					<td th:text="${alimento.valor}">Valor</td>
 					<td th:text="${alimento.descricao}">Descrição</td>
 					<td th:text="${alimento.tipo}">Tipo</td>
-					<td>Produtos</td>
+					<td><div class="btn-group">
+							<button class="btn btn-secondary btn-sm dropdown-toggle"
+								type="button" data-bs-toggle="dropdown" aria-expanded="false">
+								Produtos</button>
+							<ul class="dropdown-menu">
+							<li th:if="${alimento.produtos} != null" th:each="produto : ${alimento.produtos}"><a class="dropdown-item" th:href="@{/administracao/cardapio/removeproduto(alimentoid=${alimento.id}, produtoid=${produto.id})}"> <span th:text="${produto.nome}">produto</span> - <span th:text="${produto.quantidade}">###</span> <span th:text="${produto.medida}">U</span> </a></li>
+							<li><hr class="dropdown-divider"></li>
+							<li><a class="dropdown-item" th:href="@{/administracao/cardapio/adicionaproduto(id=${alimento.id})}">Adiciona</a></li>
+							</ul>
+						</div></td>
 					<td>
 						<div class="btn-group" role="group" aria-label="ações do item">
 							<a type="button" class="btn btn-outline-primary btn-sm"

@@ -31,10 +31,10 @@
 						method="post">
 						<label class="visually-hidden" for="inlineFormInputGroupUsername">Observacao</label>
 						<input type="text" class="form-control" id="observacao"
-							name="observacao" th:value="${pedido.observacao}">
+							name="observacao" th:value="${pedido.observacao}" placeholder="Observacao">
 							<input type="hidden" name="id" th:value="${pedido.id}">
 						<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-							<button type="submit" class="btn btn-outline-secondary m-2">Ok</button>
+							<button type="submit" class="btn btn-outline-secondary m-2">Adicionar observação</button>
 						</div>
 
 					</form>

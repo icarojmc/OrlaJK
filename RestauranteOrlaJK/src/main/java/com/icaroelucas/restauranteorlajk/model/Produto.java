@@ -20,6 +20,7 @@ public class Produto {
 	private String nome;
 	private float quantidade;
 	private LocalDate validade;
+	private boolean disponivel;
 	
 	@Enumerated(EnumType.STRING)
 	private Medida medida;
@@ -65,6 +66,14 @@ public class Produto {
 
 	public void setMedida(Medida medida) {
 		this.medida = medida;
+	}
+
+	public boolean isDisponivel() {
+		return disponivel;
+	}
+
+	public void setDisponivel(boolean disponivel) {
+		this.disponivel = disponivel;
 	}
 	
 	

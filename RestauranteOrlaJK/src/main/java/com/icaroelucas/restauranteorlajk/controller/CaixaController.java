@@ -63,6 +63,7 @@ public class CaixaController {
 		mesa.setFechada(false);
 		mesa.setOcupada(false);
 		mesa.setTotalDaConta(new BigDecimal("0.0"));
+		mesa.setClienteOcupante(null);
 		mesaRepository.save(mesa);
 
 		List<Mesa> mesas = mesaRepository.findAllByFechada(true);
