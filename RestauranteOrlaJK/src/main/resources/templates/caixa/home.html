@@ -14,7 +14,7 @@
 				<div class="d-grid gap-2">
 					<a class="btn btn-primary mb-3" data-bs-toggle="collapse"
 						th:href="'#collapse'+${mesa.id}" role="button"
-						aria-expanded="false" aria-controls="collapse"> Mesa nบ <span
+						aria-expanded="false" aria-controls="collapse"> Mesa nยบ <span
 						th:text="${mesa.numeroDaMesa}">#</span><span
 						th:text="${mesa.setor}">#</span>
 					</a>
@@ -34,7 +34,7 @@
 						<ul class="list-group list-group-flush mt-2">
 							<div th:each="pedido : ${mesa.pedidos}">
 								<li class="list-group-item" style="font-weight: bold;">Pedido
-									nบ <span th:text="${pedido} != null ? ${pedido.id} : '' ">#</span>
+									nยบ <span th:text="${pedido} != null ? ${pedido.id} : '' ">#</span>
 								</li>
 								<li class="list-group-item">Estado: <span
 									th:text="${pedido.situacao}">SITUACAO</span>

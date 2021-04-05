@@ -38,7 +38,7 @@ public class UsuariosControler {
 	@GetMapping("/novo")
 	public String adicionaNovoUsuario(Model model) {
 
-		model.addAttribute("usuarioRepetido", false);
+		model.addAttribute("usuarioRepetido", "nulo");
 		return "/administracao/usuarios/novousuario";
 	}
 
@@ -58,7 +58,7 @@ public class UsuariosControler {
 			model.addAttribute("usuarios", usuarios);
 			return "administracao/usuarios/listausuarios";		
 		} catch (Exception e) {
-			model.addAttribute("usuarioRepetido", true);
+			model.addAttribute("usuarioRepetido", "repetido");
 			
 			for (Perfil perfil : usuario.getPerfis()) {	
 				perfilRepository.delete(perfil);

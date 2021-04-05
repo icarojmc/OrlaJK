@@ -18,7 +18,7 @@
 		<h1 class="mt-2 mb-2">Novo usuário:</h1>
 
 		<div class="alert alert-danger" role="alert"
-			th:if="${usuarioRepetido} == true">Usuário repetido não permitido</div>
+			th:if="${usuarioRepetido.contains('repetido')}">Usuário repetido não permitido</div>
 		<form action="/administracao/usuarios/novo" method="post">
 			<div class="mb-3">
 				<div class="alert alert-secondary" role="alert"
