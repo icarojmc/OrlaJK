@@ -58,6 +58,6 @@ public class AdministracaoController {
 			}
 		}
 
-		return "/home";
+		return "administracao/home";
 	}
 }

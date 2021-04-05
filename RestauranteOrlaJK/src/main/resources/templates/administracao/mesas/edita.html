@@ -24,17 +24,17 @@
 				<div class="mb-3 col-12">
 					<label for="numeroDaMesa" class="form-label">Número da mesa</label> <input
 						type="number" class="form-control" id="numeroDaMesa" name="numeroDaMesa"
-						th:value="${mesa.numeroDaMesa}" aria-describedby="numeroDaMesa">
+						th:value="${mesa.numeroDaMesa}" aria-describedby="numeroDaMesa" required="required">
 				</div>
 				<div class="mb-3 col-8">
 					<label for="nDeCadeiras" class="form-label">Cadeiras</label> <input
 						type="number" class="form-control" id="nDeCadeiras"
 						name="nDeCadeiras" th:value="${mesa.nDeCadeiras}"
-						aria-describedby="nDeCadeiras">
+						aria-describedby="nDeCadeiras" required="required">
 				</div>
 				<div class="mb-3 col-4">
 				<label for="setor" class="form-label">Setor</label>
-					<select class="form-select" id="setor" th:name="setor" aria-label="setor">
+					<select class="form-select" id="setor" th:name="setor" aria-label="setor" required="required">
 						<option th:value="A" th:selected="${mesa.setor.name() == 'A'}">A</option>
 						<option th:value="B" th:selected="${mesa.setor.name() == 'B'}">B</option>
 						<option th:value="C" th:selected="${mesa.setor.name() == 'C'}">C</option>

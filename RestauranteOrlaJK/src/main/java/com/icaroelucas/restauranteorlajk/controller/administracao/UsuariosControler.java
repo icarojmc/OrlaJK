@@ -36,8 +36,9 @@ public class UsuariosControler {
 	}
 
 	@GetMapping("/novo")
-	public String adicionaNovoUsuario() {
+	public String adicionaNovoUsuario(Model model) {
 
+		model.addAttribute("usuarioRepetido", false);
 		return "/administracao/usuarios/novousuario";
 	}
 
@@ -46,15 +47,25 @@ public class UsuariosControler {
 
 		Usuario usuario = usuarioDTO.toUsuario();
 		
-		for (Perfil perfil : usuario.getPerfis()) {	
-			perfilRepository.save(perfil);
+		try {
+			
+			for (Perfil perfil : usuario.getPerfis()) {	
+				perfilRepository.save(perfil);
+			}
+			usuarioRepository.save(usuario);
+			
+			List<Usuario> usuarios = usuarioRepository.findAll();
+			model.addAttribute("usuarios", usuarios);
+			return "administracao/usuarios/listausuarios";		
+		} catch (Exception e) {
+			model.addAttribute("usuarioRepetido", true);
+			
+			for (Perfil perfil : usuario.getPerfis()) {	
+				perfilRepository.delete(perfil);
+			}
+			return "/administracao/usuarios/novousuario";
 		}
-		usuarioRepository.save(usuario);
-		
-		
-		List<Usuario> usuarios = usuarioRepository.findAll();
-		model.addAttribute("usuarios", usuarios);
-		return "administracao/usuarios/listausuarios";
+	
 	}
 	
 	@GetMapping("/edita")

@@ -19,10 +19,11 @@ public class EditaUsuarioDTO {
 		usuario.setNome(this.nome);
 		usuario.setUsuario(this.usuario);
 		usuario.apagaPerfis();
-		for (String string : perfil) {
-			usuario.adicionaPerfil(string);
+		if(perfil != null) {
+			for (String string : perfil) {
+				usuario.adicionaPerfil(string);
+			}
 		}
-		
 		return usuario;
 	}
 	

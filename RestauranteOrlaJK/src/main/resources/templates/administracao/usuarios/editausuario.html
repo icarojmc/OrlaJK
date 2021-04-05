@@ -22,12 +22,12 @@
 			<div class="mb-3">
 				<label for="nome" class="form-label">Nome do usuário</label> <input
 					type="text" class="form-control" id="nome" name="nome"
-					aria-describedby="nomedousuario" th:value="${usuario.nome}">
+					aria-describedby="nomedousuario" th:value="${usuario.nome}" required="required">
 			</div>
 			<div class="mb-3">
 				<label for="usuario" class="form-label">Usuário de acesso</label> <input
 					type="text" class="form-control" id="usuario" name="usuario"
-					aria-describedby="usuario" th:value="${usuario.usuario}">
+					aria-describedby="usuario" th:value="${usuario.usuario}" required="required">
 			</div>
 			<div class="form-check">
 				<input class="form-check-input" type="checkbox" value="RECEPCAO"

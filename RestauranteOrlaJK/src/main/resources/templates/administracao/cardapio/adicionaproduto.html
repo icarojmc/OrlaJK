@@ -22,15 +22,15 @@
 		<form action="/administracao/cardapio/adicionaproduto" method="POST">
 			<div class="mb-3">
 				<label for="nome" class="form-label">Nome</label> <input type="text"
-					class="form-control" id="nome" name="nome" aria-describedby="nome">
+					class="form-control" id="nome" name="nome" aria-describedby="nome" required="required">
 			</div>
 			<div class="mb-3">
 				<label for="quantidade" class="form-label">Quantidade</label> <input
 					type="number" class="form-control" id="quantidade"
-					name="quantidade" aria-describedby="quantidade">
+					name="quantidade" aria-describedby="quantidade" required="required">
 			</div>
 			<div class="mb-3">
-			<select class="form-select" name="medida" aria-label="Medida">
+			<select class="form-select" name="medida" aria-label="Medida" required="required">
 				<option value="UND" selected>Unidades</option>
 				<option value="KG">Quilogramas</option>
 				<option value="G">Gramas</option>

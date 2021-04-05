@@ -24,23 +24,23 @@
 				<div class="mb-3 col-12">
 					<label for="nome" class="form-label">Nome</label> <input
 						type="text" class="form-control" id="nome" name="nome"
-						th:value="${alimento.nome}" aria-describedby="nome">
+						th:value="${alimento.nome}" aria-describedby="nome" required="required">
 				</div>
 				<div class="mb-3 col-8">
 					<label for="descricao" class="form-label">Descricao</label> <input
 						type="text" class="form-control" id="descricao"
 						name="descricao" th:value="${alimento.descricao}"
-						aria-describedby="descricao">
+						aria-describedby="descricao" required="required">
 				</div>
 				<div class="mb-3 col-8">
 					<label for="valor" class="form-label">Valor</label> <input
 						type="number" class="form-control" id="valor"
 						name="valor" th:value="${alimento.valor}"
-						aria-describedby="valor">
+						aria-describedby="valor" required="required">
 				</div>
 				<div class="mb-3 col-4">
 				<label for="tipo" class="form-label">Tipo</label>
-					<select class="form-select" id="tipo" th:name="tipo" aria-label="tipo">
+					<select class="form-select" id="tipo" th:name="tipo" aria-label="tipo" required="required">
 						<option th:value="ENTRADA"
 							th:selected="${alimento.tipo.name() == 'ENTRADA'}">Entrada</option>
 						<option th:value="PRINCIPAL"

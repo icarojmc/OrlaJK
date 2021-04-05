@@ -22,20 +22,20 @@
 		<form action="/administracao/cardapio/novo" method="POST">
 			<div class="mb-3">
 				<label for="nome" class="form-label">Nome</label> <input type="text"
-					class="form-control" id="nome" name="nome" aria-describedby="nome">
+					class="form-control" id="nome" name="nome" aria-describedby="nome" required="required">
 			</div>
 			<div class="mb-3">
 				<label for="descricao" class="form-label">Descrição</label> <input type="text"
-					class="form-control" id="nome" name="descricao" aria-describedby="descricao">
+					class="form-control" id="nome" name="descricao" aria-describedby="descricao" required="required">
 			</div>
 			<div class="mb-3">
 				<label for="valor" class="form-label">Valor</label> <input
 					type="number" class="form-control" id="valor"
-					name="valor" aria-describedby="valor">
+					name="valor" aria-describedby="valor" required="required">
 			</div>
 			<div class="mb-3">
 			<label for="tipo" class="form-label">Tipo</label>
-			<select class="form-select" name="tipo" id="tipo" aria-label="tipo">
+			<select class="form-select" name="tipo" id="tipo" aria-label="tipo" required="required">
 				<option value="ENTRADA" selected>Entrada</option>
 				<option value="PRINCIPAL">Principal</option>
 				<option value="SOBREMESA">Sobremesa</option>

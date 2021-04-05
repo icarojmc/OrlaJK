@@ -24,17 +24,17 @@
 				<div class="mb-3 col-12">
 					<label for="nome" class="form-label">Nome</label> <input
 						type="text" class="form-control" id="nome" name="nome"
-						th:value="${produto.nome}" aria-describedby="nome">
+						th:value="${produto.nome}" aria-describedby="nome" required="required">
 				</div>
 				<div class="mb-3 col-8">
 					<label for="quantidade" class="form-label">Quantidade</label> <input
 						type="number" class="form-control" id="quantidade"
 						name="quantidade" th:value="${produto.quantidade}"
-						aria-describedby="quantidade">
+						aria-describedby="quantidade" required="required">
 				</div>
 				<div class="mb-3 col-4">
 				<label for="medida" class="form-label">Medida</label>
-					<select class="form-select" id="medida" th:name="medida" aria-label="Medida">
+					<select class="form-select" id="medida" th:name="medida" aria-label="Medida" required="required">
 						<option th:value="UND"
 							th:selected="${produto.medida.name() == 'UND'}">Unidades</option>
 						<option th:value="KG"
@@ -48,7 +48,7 @@
 				<div class="mb-3 col-12">
 					<label for="validade" class="form-label">Validade</label> <input
 						type="date" class="form-control" id="validade" name="validade"
-						th:value="${produto.validade}" aria-describedby="validade">
+						th:value="${produto.validade}" aria-describedby="validade" required="required">
 				</div>
 				<input type="hidden" id="id" name="id" th:value="${produto.id}">
 				<button type="submit" class="btn btn-primary">Adicionar</button>
