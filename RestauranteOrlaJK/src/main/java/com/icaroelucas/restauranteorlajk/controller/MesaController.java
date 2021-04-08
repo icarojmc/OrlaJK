@@ -2,6 +2,7 @@ package com.icaroelucas.restauranteorlajk.controller;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -108,6 +109,7 @@ public class MesaController {
 		
 		pedidoRepository.save(observacao.toPedido(pedido));
 		
+		model.addAttribute("adicionado", true);
 		model.addAttribute("cardapio", cardapio);
 		model.addAttribute("pedido", pedido);
 		
@@ -141,15 +143,20 @@ public class MesaController {
 	@GetMapping("/removepedido")
 	public String removePedido(Model model, @RequestParam String id) {
 		
-		Pedido pedido = pedidoRepository.findById(Long.parseLong(id)).get();
-		Mesa mesa = pedido.getMesa();
-		if(pedido.getTotalDoPedido() != null) mesa.removeDoTotalDaConta(pedido.getTotalDoPedido());
+		try {
+			
+			Pedido pedido = pedidoRepository.findById(Long.parseLong(id)).get();
+			Mesa mesa = pedido.getMesa();
+			if(pedido.getTotalDoPedido() != null) mesa.removeDoTotalDaConta(pedido.getTotalDoPedido());
 
-		mesaRepository.save(mesa);
-		pedidoRepository.delete(pedido);
+			mesaRepository.save(mesa);
+			pedidoRepository.delete(pedido);
+			
+		} catch (NoSuchElementException e) {
+			System.out.println(e);
+		}
 		
-		
-		
+			
 		List<Mesa> mesas = mesaRepository.findAllByOcupada(true);
 		model.addAttribute("mesas", mesas);
 		return "mesas/home";

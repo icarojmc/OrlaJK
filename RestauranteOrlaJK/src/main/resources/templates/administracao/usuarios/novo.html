@@ -17,13 +17,8 @@
 		<div th:replace="~{base :: menuAdm}"></div>
 		<h1 class="mt-2 mb-2">Novo usuário:</h1>
 
-		<div class="alert alert-danger" role="alert"
-			th:if="${usuarioRepetido.contains('repetido')}">Usuário repetido não permitido</div>
 		<form action="/administracao/usuarios/novo" method="post">
 			<div class="mb-3">
-				<div class="alert alert-secondary" role="alert"
-					th:if="usuarioRepetido == 'repetido'">Usuário repetido não
-					permitido</div>
 				<label for="nome" class="form-label">Nome do usuário</label> <input
 					type="text" class="form-control" id="nome" name="nome"
 					aria-describedby="nomedousuario" required="required">

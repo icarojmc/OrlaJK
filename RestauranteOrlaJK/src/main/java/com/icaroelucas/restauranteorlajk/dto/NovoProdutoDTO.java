@@ -20,7 +20,7 @@ public class NovoProdutoDTO {
 		
 		Produto produto = new Produto();
 		produto.setNome(nome);
-		produto.setQuantidade(Integer.parseInt(quantidade));
+		produto.setQuantidade(Float.parseFloat(quantidade));
 		produto.setValidade(data);
 		produto.setMedida(Medida.valueOf(medida));
 		produto.setDisponivel(true);

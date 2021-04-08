@@ -24,6 +24,7 @@ public class EditadoProdutoDTO {
 		produto.setQuantidade(Float.parseFloat(quantidade));
 		produto.setValidade(data);
 		produto.setMedida(Medida.valueOf(medida));
+		produto.setDisponivel(true);
 		
 		return produto;
 	}

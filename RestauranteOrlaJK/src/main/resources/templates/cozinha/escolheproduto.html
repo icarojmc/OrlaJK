@@ -29,7 +29,8 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:if="${produtos} != null" th:each="produto : ${produtos}">
+				<div th:if="${produtos} != null" th:each="produto : ${produtos}">
+				<tr th:if="${produto.disponivel}">
 					<th scope="row" th:text="${produto.id}">#</th>
 					<td th:text="${produto.nome}">Nome</td>
 					<td th:text="${produto.validade}">validade</td>
@@ -40,9 +41,10 @@
 						<form action="/cozinha/usaproduto" method="post">
 							<div class="row">
 								<div class="col-auto">
-									<input type="number" class="form-control"
-										id="quantidade" name="quantidade" aria-describedby="quantidade" required="required">
-									<input type="hidden" name="id" th:value="${produto.id}">
+									<input type="number" step=".01" class="form-control"
+										id="quantidade" name="quantidade"
+										aria-describedby="quantidade" required="required"> <input
+										type="hidden" name="id" th:value="${produto.id}">
 								</div>
 								<div class="col-auto">
 									<button type="submit" class="btn btn-primary">Ok</button>
@@ -52,7 +54,7 @@
 
 					</td>
 				</tr>
-
+				</div>
 			</tbody>
 		</table>
 

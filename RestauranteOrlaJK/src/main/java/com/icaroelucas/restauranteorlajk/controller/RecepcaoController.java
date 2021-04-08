@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -121,14 +122,20 @@ public class RecepcaoController {
 	@GetMapping("/remover")
 	public String removerDaListaDeEspera(Model model, @RequestParam String id) {
 
-		listaDeEsperaRepository.deleteById(Long.parseLong(id));
+		try{
+			listaDeEsperaRepository.deleteById(Long.parseLong(id));
+		}
+		catch(EmptyResultDataAccessException e){
+			
+			
+		}
+			List<Mesa> mesas = mesaRepository.findAll();
+			List<ListaDeEspera> lista = listaDeEsperaRepository.findAll();
+			model.addAttribute("mesas", mesas);
+			model.addAttribute("lista", lista);
 
-		List<Mesa> mesas = mesaRepository.findAll();
-		List<ListaDeEspera> lista = listaDeEsperaRepository.findAll();
-		model.addAttribute("mesas", mesas);
-		model.addAttribute("lista", lista);
-
-		return "recepcao/home";
+			return "recepcao/home";
+		
 	}
 	
 	@GetMapping("/ocupa")

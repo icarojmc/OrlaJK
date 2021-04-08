@@ -1,8 +1,10 @@
 package com.icaroelucas.restauranteorlajk.controller.administracao;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,28 +59,57 @@ public class CardapioController {
 	@GetMapping("/edita")
 	public String editaAlimento(Model model, @RequestParam String id) {
 		
+		String retorno = "administracao/cardapio/cardapio";
+		try {
+			
+			Alimento alimento = alimentoRepository.findById(Long.parseLong(id)).get();
+			model.addAttribute("alimento", alimento);
+			
+			retorno = "administracao/cardapio/edita";
+			
+		} catch (NoSuchElementException e) {
+			System.out.println(e);
+			List<Alimento> alimentos = alimentoRepository.findAll();
+			model.addAttribute("alimentos", alimentos);
+
+			retorno = "administracao/cardapio/cardapio";
+		}
 		
-		Alimento alimento = alimentoRepository.findById(Long.parseLong(id)).get();
-		model.addAttribute("alimento", alimento);
-		
-		return "administracao/cardapio/edita";
+		return retorno;
 	}
 	
 	@PostMapping("/edita")
 	public String editadoAlimento(Model model, EditadoAlimentoDTO alimento) {
 		
-		alimentoRepository.save(alimento.toAlimento());
+		String retorno = "administracao/cardapio/cardapio";
+		try {
+			alimentoRepository.save(alimento.toAlimento());
+			
+			List<Alimento> alimentos = alimentoRepository.findAll();
+			model.addAttribute("alimentos", alimentos);
+			
+			retorno = "administracao/cardapio/cardapio";
+		} catch (NoSuchElementException e) {
+			System.out.println(e);
+			List<Alimento> alimentos = alimentoRepository.findAll();
+			model.addAttribute("alimentos", alimentos);
+
+			retorno = "administracao/cardapio/cardapio";
+		}
 		
-		List<Alimento> alimentos = alimentoRepository.findAll();
-		model.addAttribute("alimentos", alimentos);
+		return retorno;
 		
-		return "administracao/cardapio/cardapio";
 	}
 	
 	@GetMapping("/exclui")
 	public String excluiAlimento(Model model, @RequestParam String id) {
 
-		alimentoRepository.deleteById(Long.parseLong(id));
+		try {
+			alimentoRepository.deleteById(Long.parseLong(id));
+		} catch (EmptyResultDataAccessException e) {
+			System.out.println(e);
+		}
+		
 		
 		List<Alimento> alimentos = alimentoRepository.findAll();
 		model.addAttribute("alimentos", alimentos);
@@ -112,13 +143,16 @@ public class CardapioController {
 	@GetMapping("/removeproduto")
 	public String removeProduto(Model model, @RequestParam String alimentoid, @RequestParam String produtoid) {
 		
-		Alimento alimento = alimentoRepository.findById(Long.parseLong(alimentoid)).get();
-		Produto produto = produtoRepository.findById(Long.parseLong(produtoid)).get();
-		alimento.removeProduto(produto);
-		
-		alimentoRepository.save(alimento);
-		produtoRepository.delete(produto);
-		
+		try {
+			Alimento alimento = alimentoRepository.findById(Long.parseLong(alimentoid)).get();
+			Produto produto = produtoRepository.findById(Long.parseLong(produtoid)).get();
+			alimento.removeProduto(produto);
+			
+			alimentoRepository.save(alimento);
+			produtoRepository.delete(produto);
+		} catch (NoSuchElementException e) {
+			System.out.println(e);
+		}
 		List<Alimento> alimentos = alimentoRepository.findAll();
 		model.addAttribute("alimentos", alimentos);
 

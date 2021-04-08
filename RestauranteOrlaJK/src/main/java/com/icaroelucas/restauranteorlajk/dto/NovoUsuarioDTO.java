@@ -9,6 +9,7 @@ import com.icaroelucas.restauranteorlajk.model.security.Usuario;
 public class NovoUsuarioDTO {
 
 	private String nome;
+	
 	private String usuario;
 	private String senha;
 	private List<String> perfil;

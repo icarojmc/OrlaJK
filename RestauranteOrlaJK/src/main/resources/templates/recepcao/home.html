@@ -22,29 +22,32 @@
 									<p class="card-text">
 										Lugares: <span th:text="${mesa.nDeCadeiras}">#</span>
 									</p>
-									<div class="btn-group">
-										<button
-											class="btn btn-secondary btn-sm dropdown-toggle mt-2 mb-2"
-											type="button" data-bs-toggle="dropdown" aria-expanded="false">
-											Cliente</button>
-										<ul class="dropdown-menu">
-											<div th:each="cliente : ${lista}">
-												<li
-													class="list-group-item d-flex justify-content-between align-items-center">
-													<div class="ms-2 me-auto">
-														<a class="dropdown-item"
-															th:href="@{/recepcao/ocupa(mesaid=${mesa.id}, clienteid=${cliente.id})}"><div
-																class="fw-bold" th:text="${cliente.cliente.nome}">Nome</div>
-														</a>
+									<div class="btn-group" role="group" aria-label="grupodeinformacoessobreamesa">
+										<div th:if="not ${#lists.isEmpty(lista)}">
+											<div class="btn-group">
+												<button class="btn btn-secondary dropdown-toggle"
+													type="button" data-bs-toggle="dropdown"
+													aria-expanded="false">Cliente</button>
+												<ul class="dropdown-menu">
+													<div th:each="cliente : ${lista}">
+														<li
+															class="list-group-item d-flex justify-content-between align-items-center">
+															<div class="ms-2 me-auto">
+																<a class="dropdown-item"
+																	th:href="@{/recepcao/ocupa(mesaid=${mesa.id}, clienteid=${cliente.id})}"><div
+																		class="fw-bold" th:text="${cliente.cliente.nome}">Nome</div>
+																</a>
 
+															</div>
+														</li>
 													</div>
-												</li>
+												</ul>
 											</div>
-
-										</ul>
+										</div>
+										<a th:href="@{/recepcao/ocupar(id=${mesa.id})}"
+											class="btn btn-primary">Ocupar</a>
 									</div>
-									<a th:href="@{/recepcao/ocupar(id=${mesa.id})}"
-										class="btn btn-primary">Ocupar</a>
+
 								</div>
 							</div>
 						</div>
@@ -59,8 +62,14 @@
 									<p class="card-text">
 										Lugares: <span th:text="${mesa.nDeCadeiras}">#</span>
 									</p>
-									<a th:href="@{/recepcao/liberar(id=${mesa.id})}"
-										class="btn btn-warning">Liberar</a>
+									<div class="btn-group" role="group" aria-label="grupodeinformacoessobreamesa">
+										<a th:href="@{/recepcao/liberar(id=${mesa.id})}"
+											class="btn btn-warning">Liberar</a>
+										<button th:if="${mesa.fechada}" type="button"
+											class="btn btn-warning" disabled>Fechada</button>
+										<button th:if="not ${mesa.fechada}" type="button"
+											class="btn btn-danger" disabled>Aberta</button>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -82,11 +91,12 @@
 						</div>
 						<div class="mb-3">
 							<label for="telefone" class="form-label">Telefone</label> <input
-								type="text" class="form-control" id="telefone" name="telefone" required="required">
+								type="number" class="form-control" id="telefone" name="telefone"
+								required="required">
 						</div>
 						<div class="mb-3">
 							<label for="quantidade" class="form-label">Quantidade</label> <input
-								type="text" class="form-control" id="quantidade"
+								type="number" class="form-control" id="quantidade"
 								name="quantidade" required="required">
 						</div>
 						<div class="d-md-flex justify-content-md-end">

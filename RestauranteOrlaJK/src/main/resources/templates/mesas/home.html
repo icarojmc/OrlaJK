@@ -14,6 +14,8 @@
 					aria-expanded="false"> Setor </a>
 
 				<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+				<li><a class="dropdown-item"
+						th:href="@{/mesas}">Todos</a></li>
 					<li><a class="dropdown-item"
 						th:href="@{/mesas/mesasporsetor(setor='A')}">A</a></li>
 					<li><a class="dropdown-item"
@@ -35,7 +37,7 @@
 					var valid = false;
 				</script>
 
-				<div class="d-grid gap-2">
+				<div class="d-grid gap-2 mt-2">
 					<a class="btn btn-primary" data-bs-toggle="collapse"
 						th:href="'#collapse'+${mesa.id}" role="button"
 						aria-expanded="false" aria-controls="collapse" id="element"> Mesa nº <span

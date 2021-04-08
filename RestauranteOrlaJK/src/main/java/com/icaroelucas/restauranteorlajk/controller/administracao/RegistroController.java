@@ -3,6 +3,7 @@ package com.icaroelucas.restauranteorlajk.controller.administracao;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,8 +31,12 @@ public class RegistroController {
 	@GetMapping("/deleta")
 	public String deletaRegistro(Model model, @RequestParam String id) {
 		
-		registroDiarioRepository.deleteById(Long.parseLong(id));
-		
+		try {
+			registroDiarioRepository.deleteById(Long.parseLong(id));
+		} catch (EmptyResultDataAccessException e) {
+			System.out.println(e);
+		}
+				
 		List<RegistroDiario> registro = registroDiarioRepository.findAll();
 		model.addAttribute("registros", registro);
 		return "administracao/registro/registro";

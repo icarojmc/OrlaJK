@@ -27,9 +27,12 @@
 						<span th:text="${item.nome}">nome</span></li>
 				</div>
 			</ul>
+			<div th:if="${adicionado != null}" class="alert alert-success" role="alert">
+  Observação adicionada!
+</div>
 			<form class="m-2" action="/mesas/adicionaobservacao"
 						method="post">
-						<label class="visually-hidden" for="inlineFormInputGroupUsername">Observacao</label>
+						<label class="visually-hidden" for="grupodeinformacoessobreaobservacao">Observacao</label>
 						<input type="text" class="form-control" id="observacao"
 							name="observacao" th:value="${pedido.observacao}" placeholder="Observacao">
 							<input type="hidden" name="id" th:value="${pedido.id}">
