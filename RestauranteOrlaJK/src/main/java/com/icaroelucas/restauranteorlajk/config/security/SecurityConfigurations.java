@@ -29,7 +29,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		http.authorizeRequests()
-		.antMatchers("/home/").permitAll()
+		.antMatchers("/images/**").permitAll()
 		.mvcMatchers("/recepcao/**").hasAuthority("RECEPCAO")
 		.mvcMatchers("/mesas/**").hasAuthority("MESAS")
 		.mvcMatchers("/cozinha/**").hasAuthority("COZINHA")

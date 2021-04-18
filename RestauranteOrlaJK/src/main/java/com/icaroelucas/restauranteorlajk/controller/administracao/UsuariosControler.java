@@ -1,5 +1,6 @@
 package com.icaroelucas.restauranteorlajk.controller.administracao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -66,6 +67,15 @@ public class UsuariosControler {
 			Usuario usuario = usuarioRepository.findById(Long.parseLong(id)).get();
 			model.addAttribute("usuario", usuario);
 
+			List<String> perfis = new ArrayList<>();
+			for (Perfil perfil : usuario.getPerfis()) {
+				
+				perfis.add(perfil.getNome());
+				
+			}
+			
+			model.addAttribute("perfis", perfis);
+			
 			retorno = "administracao/usuarios/editausuario";
 
 		} catch (NoSuchElementException e) {
