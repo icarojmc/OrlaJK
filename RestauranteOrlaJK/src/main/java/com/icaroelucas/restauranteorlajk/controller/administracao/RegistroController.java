@@ -1,44 +1,31 @@
 package com.icaroelucas.restauranteorlajk.controller.administracao;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.icaroelucas.restauranteorlajk.model.RegistroDiario;
-import com.icaroelucas.restauranteorlajk.repository.RegistroDiarioRepository;
+import com.icaroelucas.restauranteorlajk.service.administracao.RegistroDiarioService;
 
 @Controller
 @RequestMapping("/administracao/registro")
 public class RegistroController {
 
 	@Autowired
-	RegistroDiarioRepository registroDiarioRepository;
+	RegistroDiarioService registros;
 	
 	@GetMapping("")
 	public String registro(Model model) {
-	
-		List<RegistroDiario> registro = registroDiarioRepository.findAll();
-		model.addAttribute("registros", registro);
+		model.addAttribute("registros", registros.buscaRegistros());
 		return "administracao/registro/registro";
 	}
 	
 	@GetMapping("/deleta")
 	public String deletaRegistro(Model model, @RequestParam String id) {
-		
-		try {
-			registroDiarioRepository.deleteById(Long.parseLong(id));
-		} catch (EmptyResultDataAccessException e) {
-			System.out.println(e);
-		}
-				
-		List<RegistroDiario> registro = registroDiarioRepository.findAll();
-		model.addAttribute("registros", registro);
+		registros.deletaRegistro(id);
+		model.addAttribute("registros", registros.buscaRegistros());
 		return "administracao/registro/registro";
 	}
 	

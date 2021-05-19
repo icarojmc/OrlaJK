@@ -24,14 +24,14 @@
 
 			<div class="card">
 				<div class="card-header">
-					Mesa: <span th:text="${mesa.numeroDaMesa}"></span><span
-						th:text="${mesa.setor}"></span>
+					Mesa: <span th:text="${impressao.mesa.numeroDaMesa}"></span><span
+						th:text="${impressao.mesa.setor}"></span>
 				</div>
 				<div class="card-body">
 					<h5 class="card-title"
-						th:text="${mesa.clienteOcupante} != null? ${mesa.clienteOcupante.nome} : 'Cliente não cadastrado'">Special
+						th:text="${impressao.mesa.clienteOcupante} != null? ${impressao.mesa.clienteOcupante.nome} : 'Cliente não cadastrado'">Special
 						title treatment</h5>
-					<p class="card-text">Tempo de permanência: <span th:text="${permanencia}">###</span></p>
+					<p class="card-text">Tempo de permanência: <span th:text="${impressao.permanencia}">###</span></p>
 				</div>
 			</div>
 
@@ -42,13 +42,13 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="item : ${conta}">
+				<tr th:each="item : ${impressao.conta}">
 					<td th:text="${item.nome}">Nome</td>
 					<td>R$ <span th:text="${item.valor}">#</span></td>
 				</tr>
 				<tr class="table-secondary" style="font-weight: bold;">
 					<td>TOTAL:</td>
-					<td>R$ <span th:text="${total}">###</span></td>
+					<td>R$ <span th:text="${impressao.total}">###</span></td>
 				</tr>
 
 			</tbody>

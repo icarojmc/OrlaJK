@@ -23,7 +23,7 @@
 				data-bs-toggle="collapse" data-bs-target="#navbarNav"
 				aria-controls="navbarNav" aria-expanded="false"
 				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
+				<span class="navbar-toggler-icon"> </span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav">
@@ -32,14 +32,16 @@
 							th:href="@{/recepcao}">Recepção</a></li>
 					</div>
 					<div sec:authorize="hasAuthority('MESAS')">
-						<li class="nav-item"><a class="nav-link" th:href="@{/mesas}">Mesas</a></li>
+						<li class="nav-item"><a class="nav-link" th:href="@{/mesas}">Mesas</a>
+						</li>
 					</div>
 					<div sec:authorize="hasAuthority('COZINHA')">
 						<li class="nav-item"><a class="nav-link"
 							th:href="@{/cozinha}">Cozinha</a></li>
 					</div>
 					<div sec:authorize="hasAuthority('CAIXA')">
-						<li class="nav-item"><a class="nav-link" th:href="@{/caixa}">Caixa</a></li>
+						<li class="nav-item"><a class="nav-link" th:href="@{/caixa}">Caixa</a>
+						</li>
 					</div>
 					<div sec:authorize="hasAuthority('ESTOQUE')">
 						<li class="nav-item"><a class="nav-link"
@@ -55,7 +57,7 @@
 			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 				<form th:action="@{/logout}" method="post">
 					<input type="submit" class="btn btn-outline-secondary"
-						value="Sair do sistema"></input>
+						value="Sair do sistema"> </input>
 				</form>
 			</div>
 		</div>

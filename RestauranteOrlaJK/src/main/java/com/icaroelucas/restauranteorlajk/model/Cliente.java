@@ -15,7 +15,6 @@ public class Cliente {
 	private String nome;
 	private String telefone;
 	private int quantidade;
-	
 	@OneToOne(mappedBy = "clienteOcupante")
 	private Mesa mesa;
 
@@ -42,6 +41,5 @@ public class Cliente {
 	public int getQuantidade() {
 		return quantidade;
 	}
-	
-	
+
 }

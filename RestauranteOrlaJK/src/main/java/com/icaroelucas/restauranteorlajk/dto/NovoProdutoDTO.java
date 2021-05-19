@@ -1,7 +1,6 @@
 package com.icaroelucas.restauranteorlajk.dto;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import com.icaroelucas.restauranteorlajk.model.Medida;
 import com.icaroelucas.restauranteorlajk.model.Produto;
@@ -14,23 +13,20 @@ public class NovoProdutoDTO {
 	private String medida;
 	
 	public Produto toProduto() {
-		
-//		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
 		LocalDate data = LocalDate.parse(validade);
-		
 		Produto produto = new Produto();
 		produto.setNome(nome);
 		produto.setQuantidade(Float.parseFloat(quantidade));
 		produto.setValidade(data);
 		produto.setMedida(Medida.valueOf(medida));
 		produto.setDisponivel(true);
-		
 		return produto;
 	}
 	
 	public String getNome() {
 		return nome;
 	}
+	
 	public void setNome(String nome) {
 		this.nome = nome;
 	}

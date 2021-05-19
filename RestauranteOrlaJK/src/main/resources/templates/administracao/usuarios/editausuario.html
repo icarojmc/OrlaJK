@@ -22,36 +22,36 @@
 			<div class="mb-3">
 				<label for="nome" class="form-label">Nome do usuário</label> <input
 					type="text" class="form-control" id="nome" name="nome"
-					aria-describedby="nomedousuario" th:value="${usuario.nome}" required="required">
+					aria-describedby="nomedousuario" th:value="${usuarioeperfil.usuario.nome}" required="required">
 			</div>
 			<div class="mb-3">
 				<label for="usuario" class="form-label">Usuário de acesso</label> <input
 					type="text" class="form-control" id="usuario" name="usuario"
-					aria-describedby="usuario" th:value="${usuario.usuario}" required="required">
+					aria-describedby="usuario" th:value="${usuarioeperfil.usuario.usuario}" required="required">
 			</div>
 			<div class="form-check">
 				<input class="form-check-input" type="checkbox" value="RECEPCAO"
-					id="perfil" name="perfil" th:checked="${#lists.contains(perfis, 'RECEPCAO')}"> <label class="form-check-label"
+					id="perfil" name="perfil" th:checked="${#lists.contains(usuarioeperfil.perfis, 'RECEPCAO')}"> <label class="form-check-label"
 					for="flexCheckDefault">Recepção</label>
 			</div>
 			<div class="form-check">
 				<input class="form-check-input" type="checkbox" value="MESAS"
-					id="perfil" name="perfil" th:checked="${#lists.contains(perfis, 'MESAS')}"> <label class="form-check-label"
+					id="perfil" name="perfil" th:checked="${#lists.contains(usuarioeperfil.perfis, 'MESAS')}"> <label class="form-check-label"
 					for="flexCheckDefault">Mesas</label>
 			</div>
 			<div class="form-check">
 				<input class="form-check-input" type="checkbox" value="COZINHA"
-					id="perfil" name="perfil" th:checked="${#lists.contains(perfis, 'COZINHA')}"> <label class="form-check-label"
+					id="perfil" name="perfil" th:checked="${#lists.contains(usuarioeperfil.perfis, 'COZINHA')}"> <label class="form-check-label"
 					for="flexCheckDefault">Cozinha</label>
 			</div>
 			<div class="form-check">
 				<input class="form-check-input" type="checkbox" value="CAIXA"
-					id="perfil" name="perfil" th:checked="${#lists.contains(perfis, 'CAIXA')}"> <label class="form-check-label"
+					id="perfil" name="perfil" th:checked="${#lists.contains(usuarioeperfil.perfis, 'CAIXA')}"> <label class="form-check-label"
 					for="flexCheckDefault">Caixa</label>
 			</div>
 			<div class="form-check">
 				<input class="form-check-input" type="checkbox" value="ESTOQUE"
-					id="perfil" name="perfil" th:checked="${#lists.contains(perfis, 'ESTOQUE')}"> <label class="form-check-label"
+					id="perfil" name="perfil" th:checked="${#lists.contains(usuarioeperfil.perfis, 'ESTOQUE')}"> <label class="form-check-label"
 					for="flexCheckDefault">Estoque</label>
 			</div>
 			<div class="form-check">
@@ -59,7 +59,7 @@
 					id="perfil" name="perfil"> <label class="form-check-label"
 					for="flexCheckDefault">Administração</label>
 			</div>
-			<input type="hidden" name="id" id="id" th:value="${usuario.id}">
+			<input type="hidden" name="id" id="id" th:value="${usuarioeperfil.usuario.id}">
 			<button type="submit" class="btn btn-primary">Editar</button>
 		</form>
 

@@ -13,7 +13,6 @@ public class RegistroDiario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
 	private String cliente;
 	private String mesa;
 	private String pedidos;
@@ -76,6 +75,5 @@ public class RegistroDiario {
 	public void setDataDoRegistro(LocalDate dataDoRegistro) {
 		this.dataDoRegistro = dataDoRegistro;
 	}
-	
 	
 }

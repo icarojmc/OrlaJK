@@ -15,13 +15,11 @@ public class EditadoAlimentoDTO {
 	
 	public Alimento toAlimento() {
 		Alimento alimento = new Alimento();
-		
 		alimento.setId(Long.parseLong(id));
 		alimento.setNome(nome);
 		alimento.setDescricao(descricao);
 		alimento.setValor(valor);
 		alimento.setTipo(Tipo.valueOf(tipo));
-		
 		return alimento;
 	}
 	
@@ -56,8 +54,5 @@ public class EditadoAlimentoDTO {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-	
-	
-	
 	
 }

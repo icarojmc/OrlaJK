@@ -1,12 +1,6 @@
 package com.icaroelucas.restauranteorlajk.controller;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,150 +9,57 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.icaroelucas.restauranteorlajk.dto.NovoClienteDTO;
-import com.icaroelucas.restauranteorlajk.model.Cliente;
-import com.icaroelucas.restauranteorlajk.model.ListaDeEspera;
-import com.icaroelucas.restauranteorlajk.model.Mesa;
-import com.icaroelucas.restauranteorlajk.model.Pedido;
-import com.icaroelucas.restauranteorlajk.repository.ClienteRepository;
-import com.icaroelucas.restauranteorlajk.repository.ListaDeEsperaRepository;
-import com.icaroelucas.restauranteorlajk.repository.MesaRepository;
-import com.icaroelucas.restauranteorlajk.repository.PedidoRepository;
+import com.icaroelucas.restauranteorlajk.service.recepcao.ClientesEmEspera;
+import com.icaroelucas.restauranteorlajk.service.recepcao.ListaDaRecepcao;
 
 @Controller
 @RequestMapping("/recepcao")
 public class RecepcaoController {
 
 	@Autowired
-	MesaRepository mesaRepository;
-
-	@Autowired
-	ListaDeEsperaRepository listaDeEsperaRepository;
-
-	@Autowired
-	ClienteRepository clienteRepository;
+	ListaDaRecepcao listas;
 	
 	@Autowired
-	PedidoRepository pedidoRepository;
+	ClientesEmEspera espera;
 
-	@GetMapping("")
+	@GetMapping({"", "/adicionar"})
 	public String home(Model model) {
-
-		List<Mesa> mesas = mesaRepository.findAll();
-		List<ListaDeEspera> lista = listaDeEsperaRepository.findAll();
-
-		model.addAttribute("mesas", mesas);
-		model.addAttribute("lista", lista);
-
+		model.addAttribute("listas", listas.recupera());
 		return "recepcao/home";
 	}
 
 	@GetMapping("/ocupar")
 	public String ocupar(Model model, @RequestParam String id) {
-
-		Mesa mesa = mesaRepository.findById(Long.parseLong(id)).get();
-		mesa.setOcupada(true);
-		mesa.setFechada(false);
-		mesa.setChegada(LocalTime.now());
-
-		mesaRepository.save(mesa);
-
-		List<Mesa> mesas = mesaRepository.findAll();
-		List<ListaDeEspera> lista = listaDeEsperaRepository.findAll();
-
-		model.addAttribute("mesas", mesas);
-		model.addAttribute("lista", lista);
-
+		listas.ocupaMesa(id);
+		model.addAttribute("listas", listas.recupera());
 		return "recepcao/home";
 	}
 
 	@GetMapping("/liberar")
 	public String liberar(Model model, @RequestParam String id) {
-
-		Mesa mesa = mesaRepository.findById(Long.parseLong(id)).get();
-
-		List<Pedido> pedidos = mesa.getPedidos();
-
-		for (Pedido pedido : pedidos) {
-			pedidoRepository.delete(pedido);
-		}
-
-		mesa.limpaPedidos();
-		mesa.setFechada(false);
-		mesa.setOcupada(false);
-		mesa.setTotalDaConta(new BigDecimal("0.0"));
-		mesa.setClienteOcupante(null);
-		mesaRepository.save(mesa);
-
-		List<Mesa> mesas = mesaRepository.findAll();
-		List<ListaDeEspera> lista = listaDeEsperaRepository.findAll();
-
-		model.addAttribute("mesas", mesas);
-		model.addAttribute("lista", lista);
-
+		listas.liberaMesa(id);
+		model.addAttribute("listas", listas.recupera());
 		return "recepcao/home";
 	}
 
 	@PostMapping("/adicionar")
 	public String adicionaAListaDeEspera(Model model, NovoClienteDTO novoCliente) {
-
-		Cliente cliente = novoCliente.toCliente();
-		clienteRepository.save(cliente);
-
-		ListaDeEspera listaDeEspera = new ListaDeEspera();
-
-		listaDeEspera.setCliente(cliente);
-		listaDeEspera.setHoraChegada(LocalDateTime.now());
-
-		listaDeEsperaRepository.save(listaDeEspera);
-
-		List<Mesa> mesas = mesaRepository.findAll();
-		List<ListaDeEspera> lista = listaDeEsperaRepository.findAll();
-		model.addAttribute("mesas", mesas);
-		model.addAttribute("lista", lista);
-
+		espera.novoCliente(novoCliente);
+		model.addAttribute("listas", listas.recupera());
 		return "recepcao/home";
 	}
 
 	@GetMapping("/remover")
 	public String removerDaListaDeEspera(Model model, @RequestParam String id) {
-
-		try{
-			listaDeEsperaRepository.deleteById(Long.parseLong(id));
-		}
-		catch(EmptyResultDataAccessException e){
-			
-			
-		}
-			List<Mesa> mesas = mesaRepository.findAll();
-			List<ListaDeEspera> lista = listaDeEsperaRepository.findAll();
-			model.addAttribute("mesas", mesas);
-			model.addAttribute("lista", lista);
-
-			return "recepcao/home";
-		
+		espera.removeDaLista(id);
+		model.addAttribute("listas", listas.recupera());
+		return "recepcao/home";
 	}
-	
+
 	@GetMapping("/ocupa")
 	public String ocupaMesa(Model model, @RequestParam String mesaid, @RequestParam String clienteid) {
-		
-		Mesa mesa = mesaRepository.findById(Long.parseLong(mesaid)).get();
-		mesa.setOcupada(true);
-		mesa.setFechada(false);
-		mesa.setChegada(LocalTime.now());
-		
-		ListaDeEspera clienteEmEspera = listaDeEsperaRepository.findById(Long.parseLong(clienteid)).get();
-		
-		mesa.setClienteOcupante(clienteEmEspera.getCliente());
-		
-		mesaRepository.save(mesa);
-		
-		listaDeEsperaRepository.delete(clienteEmEspera);;
-		
-		List<Mesa> mesas = mesaRepository.findAll();
-		List<ListaDeEspera> lista = listaDeEsperaRepository.findAll();
-		model.addAttribute("mesas", mesas);
-		model.addAttribute("lista", lista);
-
+		espera.ocupaMesaComCliente(mesaid, clienteid);
+		model.addAttribute("listas", listas.recupera());
 		return "recepcao/home";
 	}
 }

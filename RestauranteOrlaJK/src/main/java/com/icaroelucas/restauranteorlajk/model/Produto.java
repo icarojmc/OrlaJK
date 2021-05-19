@@ -21,10 +21,8 @@ public class Produto {
 	private float quantidade;
 	private LocalDate validade;
 	private boolean disponivel;
-	
 	@Enumerated(EnumType.STRING)
 	private Medida medida;
-	
 	@ManyToMany(mappedBy = "produtos")
 	private List<Alimento> alimentos;
 
@@ -75,6 +73,5 @@ public class Produto {
 	public void setDisponivel(boolean disponivel) {
 		this.disponivel = disponivel;
 	}
-	
 	
 }

@@ -2,8 +2,6 @@ package com.icaroelucas.restauranteorlajk.dto;
 
 import java.util.List;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 import com.icaroelucas.restauranteorlajk.model.security.Usuario;
 
 public class EditaUsuarioDTO {
@@ -14,8 +12,6 @@ public class EditaUsuarioDTO {
 	private List<String> perfil;
 	
 	public Usuario toUsuario(Usuario usuario) {
-		
-		
 		usuario.setNome(this.nome);
 		usuario.setUsuario(this.usuario);
 		usuario.apagaPerfis();
@@ -26,7 +22,6 @@ public class EditaUsuarioDTO {
 		}
 		return usuario;
 	}
-	
 	
 	public String getNome() {
 		return nome;
@@ -47,17 +42,12 @@ public class EditaUsuarioDTO {
 		this.perfil = perfil;
 	}
 
-
 	public String getId() {
 		return id;
 	}
 
-
 	public void setId(String id) {
 		this.id = id;
 	}
-	
-	
-	
 	
 }

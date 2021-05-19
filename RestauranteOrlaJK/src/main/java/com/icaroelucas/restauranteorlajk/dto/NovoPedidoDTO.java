@@ -14,24 +14,23 @@ public class NovoPedidoDTO {
 	private List<Alimento> alimentos;
 	
 	public Pedido toPedido() {
-		
 		Pedido pedido = new Pedido();
 		pedido.setMesa(mesa);
 		pedido.setHoraDoPedido(horaDoPedido);
 		pedido.setAlimentos(alimentos);
-		
 		return pedido;
 	}
+	
 	public void setMesa(Mesa mesa) {
 		this.mesa = mesa;
 	}
+	
 	public void setHoraDoPedido(LocalDateTime horaDoPedido) {
 		this.horaDoPedido = horaDoPedido;
 	}
+	
 	public void setAlimentos(List<Alimento> alimentos) {
 		this.alimentos = alimentos;
 	}
-	
-	
 	
 }

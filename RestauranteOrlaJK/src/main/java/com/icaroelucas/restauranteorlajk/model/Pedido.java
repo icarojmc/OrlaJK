@@ -19,10 +19,8 @@ public class Pedido {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
 	@ManyToMany()
 	private List<Alimento> alimentos;
-	
 	@ManyToOne
 	private Mesa mesa;
 	private LocalDateTime horaDoPedido;
@@ -39,35 +37,33 @@ public class Pedido {
 		alimentos.remove(alimento);
 	}
 	
-	
 	public void setAlimentos(List<Alimento> alimentos) {
 		this.alimentos = alimentos;
 	}
+	
 	public void setMesa(Mesa mesa) {
 		this.mesa = mesa;
 	}
+	
 	public void setHoraDoPedido(LocalDateTime horaDoPedido) {
 		this.horaDoPedido = horaDoPedido;
 	}
+	
 	public void setSituacao(Situacao situacao) {
 		this.situacao = situacao;
 	}
-
 
 	public String getObservacao() {
 		return observacao;
 	}
 
-
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
 
-
 	public long getId() {
 		return id;
 	}
-
 
 	public List<Alimento> getAlimentos() {
 		return alimentos;
@@ -80,6 +76,10 @@ public class Pedido {
 	public Mesa getMesa() {
 		return mesa;
 	}
+	
+	public LocalDateTime getHoraDoPedido() {
+		return horaDoPedido;
+	}
 
 	public BigDecimal getTotalDoPedido() {
 		return totalDoPedido;
@@ -88,6 +88,5 @@ public class Pedido {
 	public void setTotalDoPedido(BigDecimal totalDoPedido) {
 		this.totalDoPedido = totalDoPedido;
 	}
-	
 	
 }

@@ -25,43 +25,45 @@ public class Mesa {
 	private boolean fechada;
 	private BigDecimal totalDaConta = new BigDecimal("0.0");
 	private LocalTime chegada;
-	
 	@OneToMany(mappedBy = "mesa")
 	private List<Pedido> pedidos;
-	
 	@OneToOne
 	private Cliente clienteOcupante;
-	
 	@Enumerated(EnumType.STRING)
 	private Setor setor;
 	
 	public void removePedido(Pedido pedido) {
-		
 		pedidos.remove(pedido);
 	}
 	
 	public boolean isOcupada() {
 		return ocupada;
 	}
+	
 	public int getNumeroDaMesa() {
 		return numeroDaMesa;
 	}
+	
 	public long getId() {
 		return id;
 	}
+	
 	public void setOcupada(boolean situacao) {
 		this.ocupada = situacao;
-
 	}
+	
 	public int getnDeCadeiras() {
 		return nDeCadeiras;
 	}
+	
 	public Setor getSetor() {
 		return setor;
 	}
+	
 	public Cliente getClienteOcupante() {
 		return clienteOcupante;
 	}
+	
 	public void setClienteOcupante(Cliente clienteOcupante) {
 		this.clienteOcupante = clienteOcupante;
 	}
@@ -69,18 +71,23 @@ public class Mesa {
 	public List<Pedido> getPedidos() {
 		return pedidos;
 	}
+	
 	public void addPedido(Pedido pedido) {
 		pedidos.add(pedido);
 	}
+	
 	public void setNumeroDaMesa(int numeroDaMesa) {
 		this.numeroDaMesa = numeroDaMesa;
 	}
+	
 	public void setnDeCadeiras(int nDeCadeiras) {
 		this.nDeCadeiras = nDeCadeiras;
 	}
+	
 	public void setSetor(Setor setor) {
 		this.setor = setor;
 	}
+	
 	public void setId(long id) {
 		this.id = id;
 	}
@@ -111,7 +118,6 @@ public class Mesa {
 
 	public void limpaPedidos() {
 		pedidos.clear();
-		
 	}
 
 	public LocalTime getChegada() {
@@ -121,7 +127,5 @@ public class Mesa {
 	public void setChegada(LocalTime chegada) {
 		this.chegada = chegada;
 	}
-	
-	
 	
 }

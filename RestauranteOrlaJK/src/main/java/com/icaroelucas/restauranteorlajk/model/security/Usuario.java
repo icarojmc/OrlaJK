@@ -15,29 +15,21 @@ import javax.persistence.ManyToMany;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.sun.istack.NotNull;
-
 @Entity
 public class Usuario implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
 	private String nome;
-	
 	@Column(unique = true, nullable = false)
 	private String usuario;
-	
 	@Column(nullable = false)
 	private String senha;
-	
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Perfil> perfis = new ArrayList<>();
 
-	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
@@ -127,7 +119,6 @@ public class Usuario implements UserDetails {
 	}
 
 	public void apagaPerfis() {
-		
 		this.perfis = new ArrayList<>();
 	}
 
@@ -135,8 +126,5 @@ public class Usuario implements UserDetails {
 	public String toString() {
 		return this.nome;
 	}
-	
-	
-	
 	
 }

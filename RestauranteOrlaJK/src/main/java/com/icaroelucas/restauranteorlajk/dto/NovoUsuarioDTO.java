@@ -15,19 +15,15 @@ public class NovoUsuarioDTO {
 	private List<String> perfil;
 
 	public Usuario toUsuario() {
-
 		Usuario usuario = new Usuario();
-
 		usuario.setNome(this.nome);
 		usuario.setUsuario(this.usuario);
 		usuario.setSenha(new BCryptPasswordEncoder().encode(this.senha));
-
 		if (perfil != null) {
 			for (String string : perfil) {
 				usuario.adicionaPerfil(string);
 			}
 		}
-
 		return usuario;
 	}
 

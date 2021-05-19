@@ -1,7 +1,6 @@
 package com.icaroelucas.restauranteorlajk.dto;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import com.icaroelucas.restauranteorlajk.model.Medida;
 import com.icaroelucas.restauranteorlajk.model.Produto;
@@ -15,9 +14,7 @@ public class EditadoProdutoDTO {
 	private String medida;
 	
 	public Produto toProduto() {
-		
 		LocalDate data = LocalDate.parse(validade);
-		
 		Produto produto = new Produto();
 		produto.setId(Long.parseLong(id));
 		produto.setNome(nome);
@@ -25,7 +22,6 @@ public class EditadoProdutoDTO {
 		produto.setValidade(data);
 		produto.setMedida(Medida.valueOf(medida));
 		produto.setDisponivel(true);
-		
 		return produto;
 	}
 	

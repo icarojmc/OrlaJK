@@ -21,18 +21,14 @@ public class Alimento {
 	private String nome;
 	private String descricao;
 	private BigDecimal valor;
-	
 	@Enumerated(EnumType.STRING)
 	private Tipo tipo;
-	
 	@ManyToMany
 	private List<Produto> produtos;
-	
 	@ManyToMany(mappedBy = "alimentos")
 	private List<Pedido> pedidos = new ArrayList<>();
 
 	public void adicionaProduto(Produto produto) {
-		
 		this.produtos.add(produto);
 	}
 	
@@ -85,11 +81,7 @@ public class Alimento {
 	}
 
 	public void removeProduto(Produto produto) {
-		
 		produtos.remove(produto);
-		
 	}
 
-	
-	
 }

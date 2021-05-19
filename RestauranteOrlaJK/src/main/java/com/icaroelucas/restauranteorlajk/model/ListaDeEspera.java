@@ -14,10 +14,8 @@ public class ListaDeEspera {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	long id;
-	
 	@ManyToOne
 	Cliente cliente;
-	
 	LocalDateTime horaChegada;
 	
 	public Cliente getCliente() {
@@ -35,6 +33,5 @@ public class ListaDeEspera {
 	public long getId() {
 		return id;
 	}
-	
 	
 }

@@ -11,13 +11,11 @@ public class EditadoMesaDTO {
 	private String setor;
 	
 	public Mesa toMesa() {
-		
 		Mesa mesa = new Mesa();
 		mesa.setId(Long.parseLong(id));
 		mesa.setnDeCadeiras(Integer.parseInt(nDeCadeiras));
 		mesa.setNumeroDaMesa(Integer.parseInt(numeroDaMesa));
 		mesa.setSetor(Setor.valueOf(setor));
-		
 		return mesa;
 	}
 	
