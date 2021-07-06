@@ -1,7 +1,8 @@
-package com.icaroelucas.restauranteorlajk.model;
+package com.icaroelucas.restauranteorlajk.entities.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -20,7 +21,7 @@ public class Pedido {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	@ManyToMany()
-	private List<Alimento> alimentos;
+	private List<Alimento> alimentos = new ArrayList<>();
 	@ManyToOne
 	private Mesa mesa;
 	private LocalDateTime horaDoPedido;
@@ -33,8 +34,18 @@ public class Pedido {
 		alimentos.add(alimento);
 	}
 	
-	public void removeAlimento(Alimento alimento) {
-		alimentos.remove(alimento);
+	public void removeAlimento(Alimento alimentoARemover) {
+		
+		for (Alimento alimento : alimentos) {
+			if(alimento.getId() == alimentoARemover.getId()) {
+				alimentos.remove(alimento);
+				break;
+			}
+		}
+	}
+	
+	public long getIdDaMesa() {
+		return mesa.getId();
 	}
 	
 	public void setAlimentos(List<Alimento> alimentos) {

@@ -1,4 +1,4 @@
-package com.icaroelucas.restauranteorlajk.model;
+package com.icaroelucas.restauranteorlajk.entities.model;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

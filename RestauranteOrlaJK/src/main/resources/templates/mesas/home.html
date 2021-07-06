@@ -17,17 +17,17 @@
 				<li><a class="dropdown-item"
 						th:href="@{/mesas}">Todos</a></li>
 					<li><a class="dropdown-item"
-						th:href="@{/mesas/mesasporsetor(setor='A')}">A</a></li>
+						th:href="@{/mesas/setor(setor='A')}">A</a></li>
 					<li><a class="dropdown-item"
-						th:href="@{/mesas/mesasporsetor(setor='B')}">B</a></li>
+						th:href="@{/mesas/setor(setor='B')}">B</a></li>
 					<li><a class="dropdown-item"
-						th:href="@{/mesas/mesasporsetor(setor='C')}">C</a></li>
+						th:href="@{/mesas/setor(setor='C')}">C</a></li>
 					<li><a class="dropdown-item"
-						th:href="@{/mesas/mesasporsetor(setor='D')}">D</a></li>
+						th:href="@{/mesas/setor(setor='D')}">D</a></li>
 					<li><a class="dropdown-item"
-						th:href="@{/mesas/mesasporsetor(setor='E')}">E</a></li>
+						th:href="@{/mesas/setor(setor='E')}">E</a></li>
 					<li><a class="dropdown-item"
-						th:href="@{/mesas/mesasporsetor(setor='F')}">F</a></li>
+						th:href="@{/mesas/setor(setor='F')}">F</a></li>
 				</ul>
 			</div>
 		</div>
@@ -54,7 +54,7 @@
 							Hora de chegada: <span th:text="${mesa.chegada}"></span>
 						</p>
 						<a th:if="${not mesa.fechada}"
-							th:href="@{/mesas/novopedido(mesaid=${mesa.id})}"
+							th:href="@{/pedidos(mesaid=${mesa.id})}"
 							class="btn btn-outline-primary">Adicionar pedido</a> <a
 							th:if="${not mesa.fechada}"
 							th:href="@{/mesas/fechamesa(id=${mesa.id})}"
@@ -87,12 +87,12 @@
 									</ul>
 									<div th:if="${not mesa.fechada}">
 										<a type="button" class="btn btn-outline-primary mt-2"
-											th:href="@{/mesas/removepedido(id=${pedido.id})}">Remover</a>
+											th:href="@{/pedidos/remove(id=${pedido.id})}">Remover</a>
 										<a type="button" class="btn btn-outline-primary mt-2"
-											th:href="@{/mesas/editapedido(id=${pedido.id})}"
+											th:href="@{/pedidos/edita(id=${pedido.id})}"
 											th:if="${pedido.situacao.name == 'EM_REALIZACAO'}">Editar</a>
 										<a type="button" class="btn btn-outline-primary mt-2"
-											th:href="@{/mesas/entregapedido(id=${pedido.id})}"
+											th:href="@{/pedidos/entrega(id=${pedido.id})}"
 											th:if="${pedido.situacao.name == 'PRONTO'}">Entregue</a>
 									</div>
 								</li>

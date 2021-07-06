@@ -2,8 +2,8 @@ package com.icaroelucas.restauranteorlajk.dto;
 
 import java.math.BigDecimal;
 
-import com.icaroelucas.restauranteorlajk.model.Alimento;
-import com.icaroelucas.restauranteorlajk.model.Tipo;
+import com.icaroelucas.restauranteorlajk.entities.model.Alimento;
+import com.icaroelucas.restauranteorlajk.entities.model.Tipo;
 
 public class EditadoAlimentoDTO {
 

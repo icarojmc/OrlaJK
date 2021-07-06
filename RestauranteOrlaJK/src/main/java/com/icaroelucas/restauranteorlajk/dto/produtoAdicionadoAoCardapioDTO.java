@@ -1,7 +1,7 @@
 package com.icaroelucas.restauranteorlajk.dto;
 
-import com.icaroelucas.restauranteorlajk.model.Medida;
-import com.icaroelucas.restauranteorlajk.model.Produto;
+import com.icaroelucas.restauranteorlajk.entities.model.Medida;
+import com.icaroelucas.restauranteorlajk.entities.model.Produto;
 
 public class produtoAdicionadoAoCardapioDTO {
  private String nome;

@@ -1,4 +1,4 @@
-package com.icaroelucas.restauranteorlajk.model.security;
+package com.icaroelucas.restauranteorlajk.entities.security;
 
 import java.util.ArrayList;
 import java.util.Collection;

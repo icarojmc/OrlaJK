@@ -1,6 +1,6 @@
 package com.icaroelucas.restauranteorlajk.dto;
 
-import com.icaroelucas.restauranteorlajk.model.Cliente;
+import com.icaroelucas.restauranteorlajk.entities.model.Cliente;
 
 public class NovoClienteDTO {
 

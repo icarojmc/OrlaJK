@@ -1,9 +1,10 @@
-package com.icaroelucas.restauranteorlajk.model;
+package com.icaroelucas.restauranteorlajk.entities.model;
 
 import java.math.BigDecimal;
 import java.time.LocalTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -25,7 +26,7 @@ public class Mesa {
 	private boolean fechada;
 	private BigDecimal totalDaConta = new BigDecimal("0.0");
 	private LocalTime chegada;
-	@OneToMany(mappedBy = "mesa")
+	@OneToMany(mappedBy = "mesa", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Pedido> pedidos;
 	@OneToOne
 	private Cliente clienteOcupante;

@@ -1,4 +1,4 @@
-package com.icaroelucas.restauranteorlajk.model;
+package com.icaroelucas.restauranteorlajk.entities.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

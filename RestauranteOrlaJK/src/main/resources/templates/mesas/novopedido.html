@@ -19,30 +19,31 @@
 		<div class="card" style="width: 18rem;">
 			<div class="card-header">Itens do pedido:</div>
 			<ul class="list-group list-group-flush">
-				<div th:if="${pedidoecardapio.pedido.alimentos} != null"
-					th:each="item : ${pedidoecardapio.pedido.alimentos}">
+				<div th:if="${pedido.alimentos} != null"
+					th:each="item : ${pedido.alimentos}">
 					<li class="list-group-item"><a type="button"
 						class="btn btn-outline-primary"
-						th:href="@{/mesas/remove(pedidoid=${pedidoecardapio.pedido.id}, id=${item.id})}">remover</a>
+						th:href="@{/pedidos/removeAlimento(id=${item.id})}">remover</a>
 						<span th:text="${item.nome}">nome</span></li>
 				</div>
 			</ul>
-			<div th:if="${adicionado != null}" class="alert alert-success" role="alert">
-  Observação adicionada!
-</div>
-			<form class="m-2" action="/mesas/adicionaobservacao"
-						method="post">
-						<label class="visually-hidden" for="grupodeinformacoessobreaobservacao">Observacao</label>
-						<input type="text" class="form-control" id="observacao"
-							name="observacao" th:value="${pedidoecardapio.pedido.observacao}" placeholder="Observacao">
-							<input type="hidden" name="id" th:value="${pedidoecardapio.pedido.id}">
-						<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-							<button type="submit" class="btn btn-outline-secondary m-2">Adicionar observação</button>
-						</div>
+			<div th:if="${pedido.observacao != null}">
+			<h6 class="card-subtitle m-2 text-muted" th:text="${pedido.observacao}"></h6>
+			</div>
+			<form class="m-2" action="/pedidos/observacao" method="post">
+				<label class="visually-hidden"
+					for="grupodeinformacoessobreaobservacao">Observacao</label> <input
+					type="text" class="form-control" id="observacao" name="observacao"
+					placeholder="Observacao"> <input
+					type="hidden" name="id" th:value="${pedido.id}">
+				<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+					<button type="submit" class="btn btn-outline-secondary m-2">Adicionar
+						observação</button>
+				</div>
 
-					</form>
+			</form>
 			<a type="button" class="btn btn-outline-primary"
-				th:href="@{/mesas/finalizanovopedido(id=${pedidoecardapio.pedido.id})}">Finalizar
+				th:href="@{/pedidos/finaliza}">Finalizar
 				pedido</a>
 		</div>
 
@@ -58,14 +59,14 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:if="${pedidoecardapio.cardapio} != null" th:each="alimento : ${pedidoecardapio.cardapio}">
+				<tr th:if="${cardapio} != null" th:each="alimento : ${cardapio}">
 					<th scope="row" th:text="${alimento.id}">#</th>
 					<td th:text="${alimento.nome}">Nome</td>
 					<td th:text="${alimento.valor}">Valor</td>
 					<td th:text="${alimento.descricao}">Descrição</td>
 					<td th:text="${alimento.tipo}">Tipo</td>
 					<td><a type="button" class="btn btn-outline-primary btn-sm"
-						th:href="@{/mesas/adiciona(pedidoid=${pedidoecardapio.pedido.id}, id=${alimento.id})}">Adicionar</a></td>
+						th:href="@{/pedidos/adiciona(pedidoid=${pedido.id}, id=${alimento.id})}">Adicionar</a></td>
 				</tr>
 			</tbody>
 		</table>

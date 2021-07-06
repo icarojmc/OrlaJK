@@ -1,7 +1,7 @@
 package com.icaroelucas.restauranteorlajk.dto;
 
-import com.icaroelucas.restauranteorlajk.model.Mesa;
-import com.icaroelucas.restauranteorlajk.model.Setor;
+import com.icaroelucas.restauranteorlajk.entities.model.Mesa;
+import com.icaroelucas.restauranteorlajk.entities.model.Setor;
 
 public class NovaMesaDTO {
 

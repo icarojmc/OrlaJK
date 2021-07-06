@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.icaroelucas.restauranteorlajk.model.security.Usuario;
+import com.icaroelucas.restauranteorlajk.entities.security.Usuario;
 import com.icaroelucas.restauranteorlajk.repository.UsuarioRepository;
 
 @Service

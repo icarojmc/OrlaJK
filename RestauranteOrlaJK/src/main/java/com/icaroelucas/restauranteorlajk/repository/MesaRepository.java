@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.icaroelucas.restauranteorlajk.model.Mesa;
-import com.icaroelucas.restauranteorlajk.model.Setor;
-import com.icaroelucas.restauranteorlajk.model.Situacao;
+import com.icaroelucas.restauranteorlajk.entities.model.Mesa;
+import com.icaroelucas.restauranteorlajk.entities.model.Setor;
+import com.icaroelucas.restauranteorlajk.entities.model.Situacao;
 
 @Repository
 public interface MesaRepository extends JpaRepository<Mesa, Long>{

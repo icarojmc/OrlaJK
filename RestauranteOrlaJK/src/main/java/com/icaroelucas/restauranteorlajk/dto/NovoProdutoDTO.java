@@ -2,8 +2,8 @@ package com.icaroelucas.restauranteorlajk.dto;
 
 import java.time.LocalDate;
 
-import com.icaroelucas.restauranteorlajk.model.Medida;
-import com.icaroelucas.restauranteorlajk.model.Produto;
+import com.icaroelucas.restauranteorlajk.entities.model.Medida;
+import com.icaroelucas.restauranteorlajk.entities.model.Produto;
 
 public class NovoProdutoDTO {
 

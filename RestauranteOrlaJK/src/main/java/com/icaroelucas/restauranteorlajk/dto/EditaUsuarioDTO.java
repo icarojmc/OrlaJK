@@ -2,7 +2,7 @@ package com.icaroelucas.restauranteorlajk.dto;
 
 import java.util.List;
 
-import com.icaroelucas.restauranteorlajk.model.security.Usuario;
+import com.icaroelucas.restauranteorlajk.entities.security.Usuario;
 
 public class EditaUsuarioDTO {
 

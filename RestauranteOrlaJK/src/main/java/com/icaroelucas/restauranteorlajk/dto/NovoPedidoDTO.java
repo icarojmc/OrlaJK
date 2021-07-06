@@ -3,9 +3,9 @@ package com.icaroelucas.restauranteorlajk.dto;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.icaroelucas.restauranteorlajk.model.Alimento;
-import com.icaroelucas.restauranteorlajk.model.Mesa;
-import com.icaroelucas.restauranteorlajk.model.Pedido;
+import com.icaroelucas.restauranteorlajk.entities.model.Alimento;
+import com.icaroelucas.restauranteorlajk.entities.model.Mesa;
+import com.icaroelucas.restauranteorlajk.entities.model.Pedido;
 
 public class NovoPedidoDTO {
 	

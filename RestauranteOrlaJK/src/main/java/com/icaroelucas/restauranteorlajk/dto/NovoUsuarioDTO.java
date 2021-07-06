@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.icaroelucas.restauranteorlajk.model.security.Usuario;
+import com.icaroelucas.restauranteorlajk.entities.security.Usuario;
 
 public class NovoUsuarioDTO {
 

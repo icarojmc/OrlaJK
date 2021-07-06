@@ -1,11 +1,11 @@
 package com.icaroelucas.restauranteorlajk.dto;
 
-import com.icaroelucas.restauranteorlajk.model.Pedido;
+import com.icaroelucas.restauranteorlajk.entities.model.Pedido;
 
 public class AdicionaObservacaoDTO {
 
 	private String observacao;
-	private String id;
+	private long id;
 	
 	public Pedido toPedido(Pedido pedido) {
 		pedido.setObservacao(observacao);
@@ -20,11 +20,11 @@ public class AdicionaObservacaoDTO {
 		this.observacao = observacao;
 	}
 	
-	public String getId() {
+	public long getId() {
 		return id;
 	}
 	
-	public void setId(String id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	
