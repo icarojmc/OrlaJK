@@ -57,10 +57,10 @@
 							th:href="@{/pedidos(mesaid=${mesa.id})}"
 							class="btn btn-outline-primary">Adicionar pedido</a> <a
 							th:if="${not mesa.fechada}"
-							th:href="@{/mesas/fechamesa(id=${mesa.id})}"
+							th:href="@{/mesas/fechaabremesa(id=${mesa.id})}"
 							class="btn btn-outline-primary">Fechar mesa</a> <a
 							th:if="${mesa.fechada}"
-							th:href="@{/mesas/abremesa(id=${mesa.id})}"
+							th:href="@{/mesas/fechaabremesa(id=${mesa.id})}"
 							class="btn btn-outline-warning">Abrir mesa</a>
 
 						<ul class="list-group list-group-flush mt-2">
