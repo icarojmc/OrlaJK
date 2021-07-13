@@ -5,31 +5,31 @@ import com.icaroelucas.restauranteorlajk.entities.mesa.model.Setor;
 
 public class NovaMesaDTO {
 
-	private String numeroDaMesa;
-	private String nDeCadeiras;
+	private int numeroDaMesa;
+	private int nDeCadeiras;
 	private String setor;
 	
 	public Mesa toMesa() {
 		Mesa mesa = new Mesa();
-		mesa.setnDeCadeiras(Integer.parseInt(nDeCadeiras));
-		mesa.setNumeroDaMesa(Integer.parseInt(numeroDaMesa));
+		mesa.setnDeCadeiras(nDeCadeiras);
+		mesa.setNumeroDaMesa(numeroDaMesa);
 		mesa.setSetor(Setor.valueOf(setor));
 		return mesa;
 	}
 	
-	public String getNumeroDaMesa() {
+	public int getNumeroDaMesa() {
 		return numeroDaMesa;
 	}
 	
-	public void setNumeroDaMesa(String numeroDaMesa) {
+	public void setNumeroDaMesa(int numeroDaMesa) {
 		this.numeroDaMesa = numeroDaMesa;
 	}
 	
-	public String getnDeCadeiras() {
+	public int getnDeCadeiras() {
 		return nDeCadeiras;
 	}
 	
-	public void setnDeCadeiras(String nDeCadeiras) {
+	public void setnDeCadeiras(int nDeCadeiras) {
 		this.nDeCadeiras = nDeCadeiras;
 	}
 	

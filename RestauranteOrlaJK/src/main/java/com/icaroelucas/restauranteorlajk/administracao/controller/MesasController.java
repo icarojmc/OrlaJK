@@ -7,21 +7,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.icaroelucas.restauranteorlajk.administracao.dto.EdicaoMesaDTO;
 import com.icaroelucas.restauranteorlajk.administracao.dto.NovaMesaDTO;
 import com.icaroelucas.restauranteorlajk.administracao.service.MesasAdminService;
+import com.icaroelucas.restauranteorlajk.entities.mesa.repository.MesaRepository;
 
 @Controller
 @RequestMapping("/administracao/mesas")
 public class MesasController {
 
 	@Autowired
-	MesasAdminService mesas;
+	MesaRepository mesaRepository;
+	
+	MesasAdminService mesaService = new MesasAdminService();
 
 	@GetMapping("")
 	public String mesas(Model model) {
-		model.addAttribute("mesas", mesas.buscaMesas());
+		model = mesaService.iniciar(mesaRepository)
+		.popularModel(model);
+		
 		return "administracao/mesas/mesas";
 	}
 
@@ -31,30 +37,27 @@ public class MesasController {
 	}
 
 	@PostMapping("/novo")
-	public String adicionadaNovaMesa(Model model, NovaMesaDTO mesa) {
-		mesas.novaMesa(mesa);
-		model.addAttribute("mesas", mesas.buscaMesas());
-		return "administracao/mesas/mesas";
+	public RedirectView adicionadaNovaMesa(NovaMesaDTO mesa) {
+		mesaService.novaMesa(mesa);
+		return new RedirectView("");
 	}
 
 	@GetMapping("/edita")
-	public String editaMesa(Model model, @RequestParam String id) {
-		model.addAttribute("mesa", mesas.buscaMesa(id));
+	public String editaMesa(Model model, @RequestParam long id) {
+		model = mesaService.popularModel(model, id);
 		return "administracao/mesas/edita";
 	}
 
 	@PostMapping("/edita")
-	public String editadaMesa(Model model, EdicaoMesaDTO mesa) {
-		mesas.editaMesa(mesa);
-		model.addAttribute("mesas", mesas.buscaMesas());
-		return "administracao/mesas/mesas";
+	public RedirectView editadaMesa(Model model, EdicaoMesaDTO mesa) {
+		mesaService.editaMesa(mesa);
+		return new RedirectView("");
 	}
 
 	@GetMapping("/exclui")
-	public String excluiMesa(Model model, @RequestParam String id) {
-		mesas.excluiMesa(id);
-		model.addAttribute("mesas", mesas.buscaMesas());
-		return "administracao/mesas/mesas";
+	public RedirectView excluiMesa(Model model, @RequestParam String id) {
+		mesaService.excluiMesa(id);
+		return new RedirectView("");
 	}
 
 }
