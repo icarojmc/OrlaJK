@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.icaroelucas.restauranteorlajk.administracao.dto.EdicaoProdutoDTO;
-import com.icaroelucas.restauranteorlajk.administracao.dto.NovoProdutoDTO;
+import com.icaroelucas.restauranteorlajk.estoque.dto.EdicaoProdutoDTO;
+import com.icaroelucas.restauranteorlajk.estoque.dto.NovoProdutoDTO;
 import com.icaroelucas.restauranteorlajk.estoque.service.EstoqueService;
 
 @Controller

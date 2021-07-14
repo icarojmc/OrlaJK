@@ -8,11 +8,11 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import com.icaroelucas.restauranteorlajk.administracao.dto.EdicaoProdutoDTO;
-import com.icaroelucas.restauranteorlajk.administracao.dto.NovoProdutoDTO;
 import com.icaroelucas.restauranteorlajk.cozinha.dto.UsaProdutoDTO;
 import com.icaroelucas.restauranteorlajk.entities.produto.model.Produto;
 import com.icaroelucas.restauranteorlajk.entities.produto.repository.ProdutoRepository;
+import com.icaroelucas.restauranteorlajk.estoque.dto.EdicaoProdutoDTO;
+import com.icaroelucas.restauranteorlajk.estoque.dto.NovoProdutoDTO;
 
 @Service
 public class EstoqueService {

@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.icaroelucas.restauranteorlajk.administracao.service.RegistroDiarioService;
+import com.icaroelucas.restauranteorlajk.administracao.registrodiario.service.RegistroDiarioService;
 import com.icaroelucas.restauranteorlajk.caixa.dto.ImpressaoDAO;
 import com.icaroelucas.restauranteorlajk.caixa.view.ContaView;
 import com.icaroelucas.restauranteorlajk.entities.alimento.model.Alimento;
