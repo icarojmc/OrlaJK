@@ -8,49 +8,59 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.view.RedirectView;
 
+import com.icaroelucas.restauranteorlajk.caixa.dto.ImpressaoDTO;
 import com.icaroelucas.restauranteorlajk.caixa.service.CaixaService;
+import com.icaroelucas.restauranteorlajk.entities.cliente.repository.ClienteRepository;
 import com.icaroelucas.restauranteorlajk.entities.mesa.repository.MesaRepository;
+import com.icaroelucas.restauranteorlajk.entities.pedido.repository.PedidoRepository;
+import com.icaroelucas.restauranteorlajk.entities.registrodiario.repository.RegistroDiarioRepository;
 
 @Controller
 @RequestMapping("/caixa")
 public class CaixaController {
 
 	@Autowired
-	CaixaService caixa;
-
+	RegistroDiarioRepository registroDiarioRepository;
 	@Autowired
 	MesaRepository mesaRepository;
+	@Autowired
+	PedidoRepository pedidoRepository;
+	@Autowired
+	ClienteRepository clienteRepository;
+	
+	CaixaService caixaService = new CaixaService();
+
 
 	@GetMapping("")
 	public String caixa(Model model) {
-		model.addAttribute("mesas", caixa.listaMesas());
+		model = caixaService.iniciar(registroDiarioRepository, mesaRepository, pedidoRepository, clienteRepository)
+		.popularModel(model);
 		return "caixa/home";
 	}
 
 	@GetMapping("/disponibilizamesa")
-	public String disponibilizaMesa(Model model, @RequestParam String id) {
+	public RedirectView disponibilizaMesa(Model model, @RequestParam String id) {
 		try {
-			caixa.disponibilizaMesa(id);
+			caixaService.disponibilizaMesa(id);
 		} catch (NoSuchElementException e) {
 			System.out.println(e);
 		}
-		model.addAttribute("mesas", caixa.listaMesas());
-		return "caixa/home";
+		return new RedirectView("");
 	}
 
 	@GetMapping("/imprimeconta")
-	public String imprimeConta(Model model, @RequestParam String id) {
+	public Object imprimeConta(Model model, @RequestParam String id) {
 
 		try {			
-			model.addAttribute("impressao", caixa.imprimeConta(id));
+			ImpressaoDTO conta = caixaService.imprimeConta(id);
+			caixaService.popularModel(model, conta);
 			return "caixa/conta";
 		} catch (NoSuchElementException e) {
 			System.out.println(e);
-
-			model.addAttribute("mesas", caixa.listaMesas());
-			return "caixa/home";
 		}
+		return new RedirectView("");
 	}
 
 }

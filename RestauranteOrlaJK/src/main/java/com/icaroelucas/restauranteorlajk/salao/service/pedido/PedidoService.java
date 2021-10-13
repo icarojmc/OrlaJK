@@ -12,7 +12,7 @@ import com.icaroelucas.restauranteorlajk.entities.pedido.repository.PedidoReposi
 public class PedidoService {
 
 	private PedidoRepository pedidoRepository = null;
-	private Pedido pedido;
+	private Pedido pedido = null;
 
 	public void iniciar(PedidoRepository pedidoRepository) {
 		if (!foiIniciado())
@@ -79,10 +79,10 @@ public class PedidoService {
 	}
 
 	public BigDecimal firmarTotalDoPedido(List<Alimento> alimentos) {
-		BigDecimal total = BigDecimal.ZERO;
 		for (Alimento alimento : alimentos) {
-			total = total.add(alimento.getValor());
+			pedido.somarAoTotalDoPedido(alimento.getValor());
 		}
+		BigDecimal total = pedido.getTotalDoPedido();
 		salvarPedido(pedido);
 		limparPedido();
 

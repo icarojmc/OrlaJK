@@ -6,7 +6,7 @@ import java.util.List;
 import com.icaroelucas.restauranteorlajk.caixa.view.ContaView;
 import com.icaroelucas.restauranteorlajk.entities.mesa.model.Mesa;
 
-public class ImpressaoDAO {
+public class ImpressaoDTO {
 
 	private Mesa mesa;
 	private List<ContaView> conta;
@@ -15,7 +15,7 @@ public class ImpressaoDAO {
 	
 	
 
-	public ImpressaoDAO(Mesa mesa, List<ContaView> conta, BigDecimal total, String permanencia) {
+	public ImpressaoDTO(Mesa mesa, List<ContaView> conta, BigDecimal total, String permanencia) {
 		super();
 		this.mesa = mesa;
 		this.conta = conta;

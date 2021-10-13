@@ -16,22 +16,24 @@ import com.icaroelucas.restauranteorlajk.recepcao.dto.NovoClienteDTO;
 public class EsperaService {
 
 	private ListaDeEsperaRepository esperaRepository = null;
+	private ClienteRepository clienteRepository = null;
 
-	public void iniciar(ListaDeEsperaRepository esperaRepository) {
-		this.esperaRepository = esperaRepository;
+	public void iniciar(ListaDeEsperaRepository esperaRepository, ClienteRepository clienteRepository) {
+		if (!foiIniciado()) {
+			this.esperaRepository = esperaRepository;
+			this.clienteRepository = clienteRepository;
+		}
 	}
 
 	public boolean foiIniciado() {
-		if (esperaRepository != null)
-			return true;
-		return false;
+		return esperaRepository != null && clienteRepository != null;
 	}
 
 	public List<ListaDeEspera> recuperar() {
 		return esperaRepository.findAll();
 	}
 
-	public void novoCliente(ClienteRepository clienteRepository, NovoClienteDTO novoCliente) {
+	public void novoCliente(NovoClienteDTO novoCliente) {
 		Cliente cliente = novoCliente.toCliente();
 		clienteRepository.save(cliente);
 		esperaRepository.save(adicionarCliente(cliente));
@@ -39,18 +41,22 @@ public class EsperaService {
 
 	public void removeDaLista(String id) {
 		try {
-			esperaRepository.deleteById(Long.parseLong(id));
+			
+			ListaDeEspera espera = esperaRepository.findById(Long.parseLong(id)).orElseThrow();
+			Cliente cliente = espera.getCliente();
+			esperaRepository.delete(espera);
+			clienteRepository.delete(cliente);
 		} catch (EmptyResultDataAccessException e) {
 			System.out.println("Implementar log: " + e);
 		}
 	}
-	
+
 	public static ListaDeEspera adicionarCliente(Cliente cliente) {
-	ListaDeEspera lista = new ListaDeEspera();
-	lista.setCliente(cliente);
-	lista.setHoraChegada(LocalDateTime.now());
-	return lista;
-}
+		ListaDeEspera lista = new ListaDeEspera();
+		lista.setCliente(cliente);
+		lista.setHoraChegada(LocalDateTime.now());
+		return lista;
+	}
 
 	public ListaDeEspera buscarClienteNaEspera(long clienteid) {
 

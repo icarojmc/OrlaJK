@@ -2,9 +2,7 @@ package com.icaroelucas.restauranteorlajk.administracao.registrodiario.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.icaroelucas.restauranteorlajk.administracao.registrodiario.dto.RegistroDiarioDTO;
@@ -23,9 +21,7 @@ public class RegistroDiarioService {
 	}
 
 	private boolean foiIniciado() {
-		if (registroDiarioRepository != null)
-			return true;
-		return false;
+		return registroDiarioRepository != null;
 	}
 
 	public Model popularModel(Model model) {

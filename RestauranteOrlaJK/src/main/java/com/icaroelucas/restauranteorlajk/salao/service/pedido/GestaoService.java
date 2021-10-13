@@ -28,11 +28,6 @@ public class GestaoService {
 
 		return this;
 	}
-	
-	private void iniciar(MesaRepository mesaRepository, AlimentoRepository alimentoRepository) {
-		mesaService.iniciar(mesaRepository);
-		alimentoService.iniciar(alimentoRepository);
-	}
 
 	public Model popularModel(Model model, long mesaId) {
 
@@ -49,7 +44,7 @@ public class GestaoService {
 		Pedido pedido = new Pedido();
 		try {
 			pedido = pedidoService.buscarPedidoEmAndamento();
-		} catch (NullPointerException e) {
+		} catch (Exception e) {
 			Mesa mesa = mesaService.buscarMesa(mesaId);
 			pedido = pedidoService.criarPedido(mesa);
 		}
@@ -71,9 +66,7 @@ public class GestaoService {
 		return pedidoService.adicionarObservacao(observacao);
 	}
 
-	public Pedido recuperarPedido(long id, MesaRepository mesaRepository, AlimentoRepository alimentoRepository,
-			PedidoRepository pedidoRepository) {
-		iniciar(mesaRepository, alimentoRepository, pedidoRepository);
+	public Pedido recuperarPedido(long id) {
 		return pedidoService.buscarPedido(id);
 	}
 
@@ -84,10 +77,7 @@ public class GestaoService {
 		mesaService.adicionaAoTotalDaConta(totalConsumido);
 	}
 
-	public void removePedido(long id, MesaRepository mesaRepository, AlimentoRepository alimentoRepository,
-			PedidoRepository pedidoRepository) {
-
-		iniciar(mesaRepository, alimentoRepository);
+	public void removePedido(long id) {
 
 		Pedido pedido = pedidoService.buscarPedido(id);
 		mesaService.removerDoTotalDaConta(pedido);

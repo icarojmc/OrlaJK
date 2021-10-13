@@ -33,7 +33,7 @@ public class RecepcaoController {
 	@GetMapping({ "", "/adicionar" })
 	public String home(Model model) {
 
-		model = recepcaoService.iniciar(mesaRepository, esperaRepository)
+		model = recepcaoService.iniciar(mesaRepository, esperaRepository, clienteRepository)
 				.popularModel(model);
 
 		return "recepcao/home";
@@ -47,7 +47,7 @@ public class RecepcaoController {
 
 	@PostMapping("/adicionar")
 	public RedirectView adicionaAListaDeEspera(NovoClienteDTO novoCliente) {
-		recepcaoService.adicionarClienteAEspera(clienteRepository, novoCliente);
+		recepcaoService.adicionarClienteAEspera(novoCliente);
 		return new RedirectView("");
 	}
 

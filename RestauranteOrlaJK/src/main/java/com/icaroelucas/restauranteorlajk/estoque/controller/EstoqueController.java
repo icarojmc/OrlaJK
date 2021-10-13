@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.view.RedirectView;
 
+import com.icaroelucas.restauranteorlajk.entities.produto.model.Produto;
+import com.icaroelucas.restauranteorlajk.entities.produto.repository.ProdutoRepository;
 import com.icaroelucas.restauranteorlajk.estoque.dto.EdicaoProdutoDTO;
 import com.icaroelucas.restauranteorlajk.estoque.dto.NovoProdutoDTO;
 import com.icaroelucas.restauranteorlajk.estoque.service.EstoqueService;
@@ -19,13 +22,14 @@ import com.icaroelucas.restauranteorlajk.estoque.service.EstoqueService;
 @RequestMapping("/estoque")
 public class EstoqueController {
 
-
 	@Autowired
-	EstoqueService estoque;
+	ProdutoRepository produtoRepository;
+	
+	EstoqueService estoqueService = new EstoqueService();
 
 	@GetMapping("")
 	public String home(Model model) {
-		model.addAttribute("produtos", estoque.localizaProdutos());
+		model = estoqueService.iniciar(produtoRepository).popularModel(model);
 		return "estoque/home";
 	}
 
@@ -33,46 +37,43 @@ public class EstoqueController {
 	public String novoAdiciona() {
 		return "estoque/novo";
 	}
-	
+
 	@PostMapping("/novo")
-	public String novoAdicionado(Model model, NovoProdutoDTO produto) {
-		estoque.novoProduto(produto);
-		model.addAttribute("produtos", estoque.localizaProdutos());
-		return "estoque/home";
+	public RedirectView novoAdicionado(Model model, NovoProdutoDTO produto) {
+		estoqueService.novoProduto(produto);
+		return new RedirectView("");
 	}
 	
 	@GetMapping("/edita")
-	public String edita(Model model, @RequestParam String id) {
+	public Object edita(Model model, @RequestParam String id) {
 		try {
-			model.addAttribute("produto", estoque.editaProduto(id));
+			Produto produto = estoqueService.editaProduto(model, id);
+			estoqueService.popularModel(model, produto);
 			return "estoque/edita";
 		} catch (NoSuchElementException e) {
 			System.out.println(e);
-			model.addAttribute("produtos", estoque.localizaProdutos());
-			return "estoque/home";
+			return new RedirectView("");
 		}
 	}
 	
 	@PostMapping("/edita")
-	public String editado(Model model, EdicaoProdutoDTO produto) {
+	public RedirectView editado(Model model, EdicaoProdutoDTO produto) {
 		try {
-			estoque.editadoProduto(produto);
+			estoqueService.editadoProduto(produto);
 		} catch (EmptyResultDataAccessException e) {
 			System.out.println(e);
 		}
-		model.addAttribute("produtos", estoque.localizaProdutos());
-		return "estoque/home";
+		return new RedirectView("");
 	}
 	
 	@GetMapping("/exclui")
-	public String excluiAlimento(Model model, @RequestParam String id) {
+	public RedirectView excluiAlimento(Model model, @RequestParam String id) {
 		try {
-			estoque.excluiProduto(id);
+			estoqueService.excluiProduto(id);
 		} catch (EmptyResultDataAccessException e) {
 			System.out.println(e);
 		}
-		model.addAttribute("produtos", estoque.localizaProdutos());
-		return "estoque/home";
+		return new RedirectView("");
 	}
 
 }

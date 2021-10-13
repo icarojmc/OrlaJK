@@ -3,9 +3,7 @@ package com.icaroelucas.restauranteorlajk.administracao.cardapio.service;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.icaroelucas.restauranteorlajk.administracao.cardapio.dto.EdicaoAlimentoDTO;
@@ -27,9 +25,7 @@ public class CardapioService {
 	}
 
 	private boolean foiIniciado() {
-		if (alimentoRepository != null)
-			return true;
-		return false;
+		return alimentoRepository != null;
 	}
 	
 	public Model popularModel(Model model) {

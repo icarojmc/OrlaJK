@@ -23,16 +23,15 @@ public class UsuariosControler {
 
 	@Autowired
 	UsuarioRepository usuarioRepository;
-	
+
 	@Autowired
 	PerfilRepository perfilRepository;
-	
+
 	UsuarioService usuarioService = new UsuarioService();
 
 	@GetMapping("")
 	public String usuarios(Model model) {
-		model = usuarioService.iniciar(usuarioRepository, perfilRepository)
-				.popularModel(model);
+		model = usuarioService.iniciar(usuarioRepository, perfilRepository).popularModel(model);
 		return "administracao/usuarios/listausuarios";
 	}
 
@@ -53,8 +52,9 @@ public class UsuariosControler {
 			model = usuarioService.popularModel(model, id);
 			return "administracao/usuarios/editausuario";
 		} catch (NoSuchElementException e) {
-			return new RedirectView("");
+			System.out.println(e);
 		}
+		return new RedirectView("");
 	}
 
 	@PostMapping("/edita")

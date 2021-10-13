@@ -13,10 +13,10 @@ public class RecepcaoService {
 	MesaService mesas = new MesaService();
 	EsperaService espera = new EsperaService();
 	
-	public RecepcaoService iniciar(MesaRepository mesaRepository, ListaDeEsperaRepository esperaRepository) {
+	public RecepcaoService iniciar(MesaRepository mesaRepository, ListaDeEsperaRepository esperaRepository, ClienteRepository clienteRepository) {
 		if(!foiIniciado()) {
 			mesas.iniciar(mesaRepository);
-			espera.iniciar(esperaRepository);
+			espera.iniciar(esperaRepository, clienteRepository);
 		}
 		return this;
 	}
@@ -36,8 +36,8 @@ public class RecepcaoService {
 		mesas.ocuparDesocupar(id);
 	}
 
-	public void adicionarClienteAEspera(ClienteRepository clienteRepository, NovoClienteDTO novoCliente) {
-		espera.novoCliente(clienteRepository, novoCliente);
+	public void adicionarClienteAEspera(NovoClienteDTO novoCliente) {
+		espera.novoCliente(novoCliente);
 		
 	}
 

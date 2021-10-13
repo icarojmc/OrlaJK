@@ -3,7 +3,6 @@ package com.icaroelucas.restauranteorlajk.estoque.service;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -14,7 +13,6 @@ import com.icaroelucas.restauranteorlajk.entities.produto.repository.ProdutoRepo
 import com.icaroelucas.restauranteorlajk.estoque.dto.EdicaoProdutoDTO;
 import com.icaroelucas.restauranteorlajk.estoque.dto.NovoProdutoDTO;
 
-@Service
 public class EstoqueService {
 
 	ProdutoRepository produtoRepository = null;
@@ -34,17 +32,22 @@ public class EstoqueService {
 		model.addAttribute("produtos", produtos);
 		return model;
 	}
+	
+	public Model popularModel(Model model, Object object) {
+		return model.addAttribute("produto", object);
+	}
 
 	public List<Produto> localizaProdutos(){
 		return produtoRepository.findAll();
 	}
 	
-	public void novoProduto(NovoProdutoDTO produto) {
+	public EstoqueService novoProduto(NovoProdutoDTO produto) {
 		produtoRepository.save(produto.toProduto());
+		return this;
 	}
 	
-	public Produto editaProduto(String id) throws NoSuchElementException{
-		return produtoRepository.findById(Long.parseLong(id)).get();	
+	public Produto editaProduto(Model model, String id) throws NoSuchElementException{
+		return produtoRepository.findById(Long.parseLong(id)).get();
 	}
 	
 	public void editadoProduto(EdicaoProdutoDTO produto) throws EmptyResultDataAccessException {

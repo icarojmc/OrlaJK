@@ -7,32 +7,53 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.icaroelucas.restauranteorlajk.administracao.registrodiario.service.RegistroDiarioService;
-import com.icaroelucas.restauranteorlajk.caixa.dto.ImpressaoDAO;
+import com.icaroelucas.restauranteorlajk.caixa.dto.ImpressaoDTO;
 import com.icaroelucas.restauranteorlajk.caixa.view.ContaView;
 import com.icaroelucas.restauranteorlajk.entities.alimento.model.Alimento;
+import com.icaroelucas.restauranteorlajk.entities.cliente.model.Cliente;
+import com.icaroelucas.restauranteorlajk.entities.cliente.repository.ClienteRepository;
 import com.icaroelucas.restauranteorlajk.entities.mesa.model.Mesa;
 import com.icaroelucas.restauranteorlajk.entities.mesa.repository.MesaRepository;
 import com.icaroelucas.restauranteorlajk.entities.pedido.model.Pedido;
 import com.icaroelucas.restauranteorlajk.entities.pedido.repository.PedidoRepository;
 import com.icaroelucas.restauranteorlajk.entities.registrodiario.repository.RegistroDiarioRepository;
-import com.icaroelucas.restauranteorlajk.salao.service.pedido.GestaoService;
 
-@Service
 public class CaixaService {
 
-	@Autowired
-	RegistroDiarioRepository registroDiarioRepository;
+	RegistroDiarioRepository registroDiarioRepository = null;
+
+	MesaRepository mesaRepository = null;
 	
-	@Autowired
-	MesaRepository mesaRepository;
+	PedidoRepository pedidoRepository = null;
 	
-	@Autowired
-	PedidoRepository pedidoRepository;
+	ClienteRepository clienteRepository = null;
 	
+	public CaixaService iniciar(RegistroDiarioRepository registroDiarioRepository, MesaRepository mesaRepository, PedidoRepository pedidoRepository, ClienteRepository clienteRepository) {
+		
+		if(!foiIniciado()) {
+		this.mesaRepository = mesaRepository;
+		this.pedidoRepository = pedidoRepository;
+		this.registroDiarioRepository = registroDiarioRepository;
+		this.clienteRepository = clienteRepository;
+		}
+		return this;
+	}
+	
+	public Model popularModel(Model model) {
+		return model.addAttribute("mesas", listaMesas());
+	}
+	
+	public Model popularModel(Model model, ImpressaoDTO conta) {
+		return model.addAttribute("impressao", conta);
+	}
+	
+	private boolean foiIniciado() {
+		return registroDiarioRepository != null && mesaRepository != null && pedidoRepository != null && clienteRepository != null;
+	}
+
 	public List<Mesa> listaMesas(){
 		return mesaRepository.findAllByFechada(true);
 	}
@@ -42,8 +63,9 @@ public class CaixaService {
 		Mesa mesa = mesaRepository.findById(Long.parseLong(id)).get();
 		new RegistroDiarioService().registraConsumo(mesa, registroDiarioRepository);
 		List<Pedido> pedidos = mesa.getPedidos();
+		Cliente clienteOcupante = mesa.getClienteOcupante();
 		for (Pedido pedido : pedidos) {
-			new GestaoService().removePedido(pedido, pedidoRepository);
+			pedidoRepository.delete(pedido);
 		}
 		mesa.limpaPedidos();
 		mesa.setFechada(false);
@@ -51,9 +73,10 @@ public class CaixaService {
 		mesa.setTotalDaConta(new BigDecimal("0.0"));
 		mesa.setClienteOcupante(null);
 		mesaRepository.save(mesa);
+		if(clienteOcupante != null) clienteRepository.delete(clienteOcupante);
 	}
 	
-	public ImpressaoDAO imprimeConta(String id) throws NoSuchElementException {
+	public ImpressaoDTO imprimeConta(String id) throws NoSuchElementException {
 		Mesa mesa = mesaRepository.findById(Long.parseLong(id)).get();
 		Duration permanencia = Duration.between(mesa.getChegada(), LocalTime.now());
 		List<ContaView> conta = new ArrayList<>();
@@ -65,7 +88,9 @@ public class CaixaService {
 				total = total.add(alimento.getValor());
 			}
 		}
-		return new ImpressaoDAO(mesa, conta, total,
+		return new ImpressaoDTO(mesa, conta, total,
 				permanencia.toHoursPart() + ":" + permanencia.toMinutesPart() + ":" + permanencia.toSecondsPart());
 	}
+
+	
 }

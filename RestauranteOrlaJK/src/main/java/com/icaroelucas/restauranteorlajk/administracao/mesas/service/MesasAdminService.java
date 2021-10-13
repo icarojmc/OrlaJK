@@ -21,8 +21,7 @@ public class MesasAdminService {
 	}
 
 	private boolean foiIniciado() {
-		if(mesaRepository != null) return true;
-		return false;
+		return mesaRepository != null;
 	}
 	
 	public Model popularModel(Model model) {

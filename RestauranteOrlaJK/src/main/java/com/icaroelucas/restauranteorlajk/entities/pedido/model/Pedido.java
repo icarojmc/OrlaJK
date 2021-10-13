@@ -47,6 +47,14 @@ public class Pedido {
 		}
 	}
 	
+	public void somarAoTotalDoPedido(BigDecimal valor) {
+		this.totalDoPedido = this.totalDoPedido.add(valor);
+	}
+	
+	public void subtratirDoTotalDoPedido(BigDecimal valor) {
+		this.totalDoPedido = this.totalDoPedido.subtract(valor);
+	}
+	
 	public long getIdDaMesa() {
 		return mesa.getId();
 	}

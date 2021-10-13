@@ -3,9 +3,6 @@ package com.icaroelucas.restauranteorlajk.administracao.service;
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.icaroelucas.restauranteorlajk.administracao.registrodiario.dto.RegistroDiarioDTO;
 import com.icaroelucas.restauranteorlajk.entities.mesa.model.Mesa;
 import com.icaroelucas.restauranteorlajk.entities.mesa.repository.MesaRepository;
@@ -31,8 +28,7 @@ public class AdministracaoService {
 	}
 	
 	private boolean foiIniciado() {
-		if(mesaRepository != null && pedidoRepository != null && registroDiarioRepository != null) return true;
-		return false;
+		return mesaRepository != null && pedidoRepository != null && registroDiarioRepository != null;
 	}
 
 	public void fechaRestaurante() {
