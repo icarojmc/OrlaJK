@@ -53,4 +53,9 @@ public class LoginController {
 		return "security/login";
 	}
 	
+	@GetMapping("/recupera")
+	public RedirectView voltar() {
+		return new RedirectView("");
+	}
+	
 }

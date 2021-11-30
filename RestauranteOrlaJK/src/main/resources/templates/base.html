@@ -79,24 +79,29 @@
 
 <div th:fragment="menuAdm(titulo)">
 
-	<div class="btn-group" role="group" aria-label="Menu do administrativo">
-		<a type="button" class="btn btn-outline-primary"
-			href="/administracao/cardapio">Cardápio</a> <a type="button"
-			class="btn btn-outline-primary" href="/administracao/mesas">Mesas</a>
-		<a type="button" class="btn btn-outline-primary"
-			href="/administracao/setor">Setores</a> <a type="button"
-			class="btn btn-outline-primary" href="/administracao/usuarios">Usuarios</a>
-		<a type="button" class="btn btn-outline-primary"
-			href="/administracao/fornecedor">Fornecedores</a> <a type="button"
-			class="btn btn-outline-primary" href="/administracao/debito">Debitos</a>
-		<a type="button" class="btn btn-outline-primary"
-			href="/administracao/agenda">Agenda</a> <a type="button"
-			class="btn btn-outline-primary" href="/administracao/feedback">Feedback</a>
-		<a type="button" class="btn btn-outline-primary"
-			href="/administracao/registro">Registro</a> <a type="button"
-			class="btn btn-outline-primary" href="/administracao/config">Outros</a>
 
+	<div class="dropdown">
+		<div class="row">
+			<div class="mb-4 mt-2 col-4 d-grid">
+				<button class="btn btn-secondary dropdown-toggle" type="button"
+					id="dropdownMenuButton1" data-bs-toggle="dropdown"
+					aria-expanded="false">Menu administrativo</button>
+				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+					<li><a class="dropdown-item" href="/administracao/cardapio">Cardápio</a></li>
+					<li><a class="dropdown-item" href="/administracao/mesas">Mesas</a></li>
+					<li><a class="dropdown-item" href="/administracao/setor">Setores</a></li>
+					<li><a class="dropdown-item" href="/administracao/usuarios">Usuarios</a></li>
+					<li><a class="dropdown-item" href="/administracao/fornecedor">Fornecedores</a></li>
+					<li><a class="dropdown-item" href="/administracao/debito">Debitos</a></li>
+					<li><a class="dropdown-item" href="/administracao/agenda">Agenda</a></li>
+					<li><a class="dropdown-item" href="/administracao/feedback">Feedback</a></li>
+					<li><a class="dropdown-item" href="/administracao/registro">Registro</a></li>
+					<li><a class="dropdown-item" href="/administracao/config">Outros</a></li>
+				</ul>
+			</div>
+		</div>
 	</div>
+
 
 	<hr>
 

@@ -13,23 +13,9 @@
 <body>
 	<div class="container">
 
-		<div th:if="${login}">
-			<div class="row">
-				<div class="col-6 align-self-end">
-					<div class="alert alert-info alert-dismissible fade show m-4"
-						role="alert">
-						<strong> Bem vindo ao sistema de gerenciamento, utilize
-							esse perfil para inclusão dos perfis iniciais:</strong><br>Usuário: <span
-							th:text="${login}">login</span> <br>Senha: <span
-							th:text="${senha}">senha</span>
-						<button type="button" class="btn-close" data-bs-dismiss="alert"
-							aria-label="Close"></button>
-					</div>
-				</div>
-			</div>
-		</div>
-
 		<div class="position-absolute top-50 start-50 translate-middle">
+
+
 
 			<div class="card">
 				<div class="row">
@@ -41,6 +27,17 @@
 				</div>
 				<div class="card-header">Identificação do usuário</div>
 				<div class="card-body">
+					<div th:if="${login}">
+						<div class="alert alert-info alert-dismissible fade show m-4"
+							role="alert">
+							<strong> Bem vindo ao sistema de gerenciamento, utilize
+								esse perfil para inclusão dos perfis iniciais:</strong><br>Usuário:
+							<span th:text="${login}">login</span> <br>Senha: <span
+								th:text="${senha}">senha</span>
+							<button type="button" class="btn-close" data-bs-dismiss="alert"
+								aria-label="Close"></button>
+						</div>
+					</div>
 					<div class="alert alert-danger" role="alert" th:if="${param.error}">Usuário
 						e/ou senha inválido.</div>
 					<div th:if="${param.logout}">Bom descanso.</div>
