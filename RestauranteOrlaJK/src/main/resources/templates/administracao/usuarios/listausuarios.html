@@ -14,10 +14,35 @@
 
 	<div class="container">
 
-		<div th:replace="~{base :: menuAdm}"></div>
-		<h1 class="mt-2 mb-2">Editar usuários:</h1>
-		<a type="button" class="btn btn-outline-primary mb-2"
-			href="/administracao/usuarios/novo">Novo usuário</a>
+		<div th:replace="~{base :: menuAdm('Usuários')}"></div>
+
+		<div class="row">
+			<div class="mb-4 mt-2 col-4 d-grid">
+				<a type="button" class="btn btn-outline-primary mb-2"
+					href="/administracao/usuarios/novo">Novo usuário</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="mb-4 mt-2 col-4 d-grid">
+				<div th:if="${(param.pgid != null) and (param.pgid[0] == '1')}">
+					<div class="alert alert-success alert-dismissible fade show"
+						role="alert">
+						Senha alterada com sucesso!
+						<button type="button" class="btn-close" data-bs-dismiss="alert"
+							aria-label="Close"></button>
+					</div>
+				</div>
+				<div th:if="${(param.pgid != null) and (param.pgid[0] == '2')}">
+					<div class="alert alert-warning alert-dismissible fade show"
+						role="alert">
+						Usuário não encontrado
+						<button type="button" class="btn-close" data-bs-dismiss="alert"
+							aria-label="Close"></button>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<table class="table">
 			<thead>
 				<tr>
@@ -30,27 +55,26 @@
 			</thead>
 			<tbody>
 				<tr th:each="usuario : ${usuarios}">
-					<div th:if="${usuario.nome != 'W@5628SA_2548!'}">
-						<th th:text="${usuario.id}" scope="row">1</th>
-						<td th:text="${usuario.nome}">nome</td>
-						<td th:text="${usuario.usuario}">usuario</td>
-						<td>
-							<ul class="list-group">
-								<li th:each="perfil : ${usuario.perfis}" class="list-group-item"><span
+					<th th:text="${usuario.id}" scope="row">1</th>
+					<td th:text="${usuario.nome}">nome</td>
+					<td th:text="${usuario.usuario}">usuario</td>
+					<td>
+						<ul class="list-group">
+							<li th:each="perfil : ${usuario.perfis}" class="list-group-item"><span
 								th:text="${perfil.nome}"> </span></li>
-							</ul>
-						</td>
+						</ul>
+					</td>
 
-						<td>
-							<div class="btn-group" role="group"
-							aria-label="ações do item">
+					<td>
+						<div class="btn-group" role="group" aria-label="ações do item">
 							<a th:href="@{/administracao/usuarios/edita(id=${usuario.id})}"
 								class="btn btn-outline-primary" role="button">Editar</a> <a
 								th:href="@{/administracao/usuarios/deleta(id=${usuario.id})}"
-								class="btn btn-outline-primary" role="button">Deleta</a>
-							</div>
-						</td>
-					</div>
+								class="btn btn-outline-primary" role="button">Deleta</a> <a
+								th:href="@{/administracao/usuarios/senha(id=${usuario.id})}"
+								class="btn btn-outline-primary" role="button">Mudar senha</a>
+						</div>
+					</td>
 				</tr>
 			</tbody>
 		</table>

@@ -12,14 +12,23 @@
 </head>
 <body>
 	<div class="container">
-<div class="row">
-<div class="col-6 align-self-end">
-<div class="alert alert-info alert-dismissible fade show m-4" role="alert"><strong>
-  Para teste do sistema utilize as credenciais:</strong><br>Usuário: superadmin<br>Senha:admin
-  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
-</div>
-</div>
+
+		<div th:if="${login}">
+			<div class="row">
+				<div class="col-6 align-self-end">
+					<div class="alert alert-info alert-dismissible fade show m-4"
+						role="alert">
+						<strong> Bem vindo ao sistema de gerenciamento, utilize
+							esse perfil para inclusão dos perfis iniciais:</strong><br>Usuário: <span
+							th:text="${login}">login</span> <br>Senha: <span
+							th:text="${senha}">senha</span>
+						<button type="button" class="btn-close" data-bs-dismiss="alert"
+							aria-label="Close"></button>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<div class="position-absolute top-50 start-50 translate-middle">
 
 			<div class="card">
@@ -51,13 +60,69 @@
 								id="password">
 						</div>
 						<div class="d-grid gap-2">
-							<input type="submit" class="btn btn-outline-primary" value="Entrar" />
+							<input type="submit" class="btn btn-outline-primary"
+								value="Entrar" />
 						</div>
 					</form>
+					<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+						<div class="dropdown mt-4">
+							<button class="btn btn-secondary dropdown-toggle" type="button"
+								id="dropdownMenuButton1" data-bs-toggle="dropdown"
+								aria-expanded="false"></button>
+							<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+								<li><a class="dropdown-item" th:href="@{/feedback}"
+									role="button">Tela de feedback</a></li>
+								<li><button type="button" class="dropdown-item"
+										data-bs-toggle="modal" data-bs-target="#exampleModal">Recuperar
+										acesso administrativo</button></li>
+							</ul>
+						</div>
+					</div>
+
+
+
+
+
 				</div>
+
 
 			</div>
 		</div>
+
+		<div th:if="${pergunta}">
+			<!-- Modal -->
+			<div class="modal fade" id="exampleModal" tabindex="-1"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Pergunta
+								secreta</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<form action="/login/recupera" method="POST">
+								<div class="row">
+									<div class="form-floating mb-3 col-12">
+										<p th:text="${pergunta}">
+									</div>
+									<div class="form-floating mb-3 col-12">
+										<input type="text" class="form-control" id="resposta"
+											name="resposta" aria-describedby="resposta"
+											required="required"> <label for="resposta"
+											class="ms-2">Resposta secreta</label>
+									</div>
+									<button type="submit" class="btn btn-primary">Enviar</button>
+								</div>
+							</form>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<script
 			src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
 			integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"

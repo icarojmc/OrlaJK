@@ -7,7 +7,7 @@
 
 	<div class="container">
 		<div class="row">
-			<div class="col-9">
+			<div class="col-12 col-lg-9">
 				<h1>Escolha uma mesa:</h1>
 				<div class="row">
 					<div th:each="mesa : ${mesas}" class="col-lg-3 col-md-4">
@@ -15,14 +15,15 @@
 							<div class="card border-primary mb-3" style="max-width: 18rem;">
 								<div class="card-header">
 									Mesa nº <span th:text="${mesa.numeroDaMesa}">#</span><span
-										th:text="${mesa.setor}">#</span>
+										th:text="${mesa.setor.nome}">#</span>
 								</div>
 								<div class="card-body">
 									<h5 class="card-title text-primary">Livre</h5>
 									<p class="card-text">
 										Lugares: <span th:text="${mesa.nDeCadeiras}">#</span>
 									</p>
-									<div class="btn-group" role="group" aria-label="grupodeinformacoessobreamesa">
+									<div class="btn-group" role="group"
+										aria-label="grupodeinformacoessobreamesa">
 										<div th:if="not ${#lists.isEmpty(esperas)}">
 											<div class="btn-group">
 												<button class="btn btn-secondary dropdown-toggle"
@@ -55,14 +56,15 @@
 							<div class="card border-warning mb-3" style="max-width: 18rem;">
 								<div class="card-header">
 									Mesa nº <span th:text="${mesa.numeroDaMesa}">#</span><span
-										th:text="${mesa.setor}">#</span>
+										th:text="${mesa.setor.nome}">#</span>
 								</div>
 								<div class="card-body text-warning">
 									<h5 class="card-title text-warning">Ocupada</h5>
 									<p class="card-text">
 										Lugares: <span th:text="${mesa.nDeCadeiras}">#</span>
 									</p>
-									<div class="btn-group" role="group" aria-label="grupodeinformacoessobreamesa">
+									<div class="btn-group" role="group"
+										aria-label="grupodeinformacoessobreamesa">
 										<a th:href="@{/recepcao/ocupar(id=${mesa.id})}"
 											class="btn btn-warning">Liberar</a>
 										<button th:if="${mesa.fechada}" type="button"
@@ -78,26 +80,26 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-3">
-				<div class="card" style="width: 18rem;">
-					<div class="card-header">Lista de espera</div>
+			<div class="col-12 col-lg-3">
+				<div class="card text-center mb-4" >
+					<h5 class="card-header mb-4">Lista de espera</h5>
 
 					<form class="mb-4 me-2 ms-2" action="/recepcao/adicionar"
 						method="POST">
-						<div class="mb-3">
-							<label for="nome" class="form-label">Nome</label> <input
-								type="text" class="form-control" id="nome" name="nome"
-								aria-describedby="nome" required="required">
+						<div class="form-floating mb-3">
+							<input type="text" class="form-control" id="nome" name="nome"
+								aria-describedby="nome" required="required"> <label
+								for="nome" class="floatingInput">Nome</label>
 						</div>
-						<div class="mb-3">
-							<label for="telefone" class="form-label">Telefone</label> <input
-								type="number" class="form-control" id="telefone" name="telefone"
-								required="required">
+						<div class="form-floating mb-3">
+							<input type="number" class="form-control" id="telefone"
+								name="telefone" required="required"> <label
+								for="telefone" class="floatingInput">Telefone</label>
 						</div>
-						<div class="mb-3">
-							<label for="quantidade" class="form-label">Quantidade</label> <input
-								type="number" class="form-control" id="quantidade"
-								name="quantidade" required="required">
+						<div class="form-floating mb-3">
+							<input type="number" class="form-control" id="quantidade"
+								name="quantidade" required="required"> <label
+								for="quantidade" class="floatingInput">Quantidade</label>
 						</div>
 						<div class="d-md-flex justify-content-md-end">
 							<button type="submit" class="btn btn-primary me-4">Adicionar</button>

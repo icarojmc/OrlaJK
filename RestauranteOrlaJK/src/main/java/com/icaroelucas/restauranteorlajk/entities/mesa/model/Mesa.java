@@ -6,16 +6,17 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.icaroelucas.restauranteorlajk.entities.cliente.model.Cliente;
 import com.icaroelucas.restauranteorlajk.entities.pedido.model.Pedido;
+import com.icaroelucas.restauranteorlajk.entities.setor.model.Setor;
 
 @Entity(name = "mesa")
 public class Mesa {
@@ -33,7 +34,8 @@ public class Mesa {
 	private List<Pedido> pedidos;
 	@OneToOne
 	private Cliente clienteOcupante;
-	@Enumerated(EnumType.STRING)
+	@ManyToOne
+	@JoinColumn(name = "setor_id")
 	private Setor setor;
 	
 	public void removePedido(Pedido pedido) {

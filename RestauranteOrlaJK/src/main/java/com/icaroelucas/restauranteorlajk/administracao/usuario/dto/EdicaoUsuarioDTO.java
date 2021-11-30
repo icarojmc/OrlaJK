@@ -2,6 +2,7 @@ package com.icaroelucas.restauranteorlajk.administracao.usuario.dto;
 
 import java.util.List;
 
+import com.icaroelucas.restauranteorlajk.entities.usuario.model.Perfil;
 import com.icaroelucas.restauranteorlajk.entities.usuario.model.Usuario;
 
 public class EdicaoUsuarioDTO {
@@ -11,15 +12,11 @@ public class EdicaoUsuarioDTO {
 	private String usuario;
 	private List<String> perfil;
 	
-	public Usuario toUsuario(Usuario usuario) {
+	public Usuario toUsuario(Usuario usuario, List<Perfil> perfis) {
 		usuario.setNome(this.nome);
 		usuario.setUsuario(this.usuario);
-		usuario.apagaPerfis();
-		if(perfil != null) {
-			for (String string : perfil) {
-				usuario.adicionaPerfil(string);
-			}
-		}
+		usuario.setPerfis(perfis);
+
 		return usuario;
 	}
 	

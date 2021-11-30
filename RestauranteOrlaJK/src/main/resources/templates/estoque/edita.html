@@ -19,22 +19,34 @@
 			<div class="dropdown mb-4 mt-2 col-4"></div>
 		</div>
 
+		<div class="row">
+			<div class="mb-4 mt-2 col-4 d-grid">
+				<a href="/estoque"
+					class="btn btn-outline-primary me-md-2" type="button">Voltar</a>
+			</div>
+		</div>
 		<form action="/estoque/edita" method="POST">
 			<div class="row">
-				<div class="mb-3 col-12">
-					<label for="nome" class="form-label">Nome</label> <input
-						type="text" class="form-control" id="nome" name="nome"
-						th:value="${produto.nome}" aria-describedby="nome" required="required">
+				<div class="form-floating mb-3 col-12 col-md-6">
+					<input type="text" class="form-control" id="nome" name="nome"
+						th:value="${produto.nome}" aria-describedby="nome"
+						required="required"> <label for="nome" class="ms-2">Nome</label>
 				</div>
-				<div class="mb-3 col-8">
-					<label for="quantidade" class="form-label">Quantidade</label> <input
-						type="number" step=".01" class="form-control" id="quantidade"
-						name="quantidade" th:value="${produto.quantidade}"
-						aria-describedby="quantidade" required="required">
+				<div class="form-floating mb-3 col-12 col-md-6">
+					<input type="text" class="form-control" id="fabricante"
+						name="fabricante" th:value="${produto.fabricante}"
+						aria-describedby="fabricante" required="required"> <label
+						class="ms-2" for="marca">Fabricante</label>
 				</div>
-				<div class="mb-3 col-4">
-				<label for="medida" class="form-label">Medida</label>
-					<select class="form-select" id="medida" th:name="medida" aria-label="Medida" required="required">
+				<div class="form-floating mb-3 col-12 col-md-6">
+					<input type="number" step=".01" class="form-control"
+						id="quantidade" name="quantidade" th:value="${produto.quantidade}"
+						aria-describedby="quantidade" required="required"> <label
+						for="quantidade" class="ms-2">Quantidade</label>
+				</div>
+				<div class="form-floating mb-3 col-12 col-md-6">
+					<select class="form-select" id="medida" th:name="medida"
+						aria-label="Medida" required="required">
 						<option th:value="UND"
 							th:selected="${produto.medida.name() == 'UND'}">Unidades</option>
 						<option th:value="KG"
@@ -43,15 +55,44 @@
 						<option th:value="L" th:selected="${produto.medida.name() == 'L'}">Litros</option>
 						<option th:value="ML"
 							th:selected="${produto.medida.name() == 'ML'}">Mililitros</option>
-					</select>
+					</select> <label for="medida" class="ms-2">Medida</label>
 				</div>
-				<div class="mb-3 col-12">
-					<label for="validade" class="form-label">Validade</label> <input
-						type="date" class="form-control" id="validade" name="validade"
-						th:value="${produto.validade}" aria-describedby="validade" required="required">
+				<div class="form-floating mb-3 col-12 col-md-6">
+					<input type="text" class="form-control" id="temperatura"
+						name="temperatura" th:value="${produto.temperatura}"
+						aria-describedby="temperatura" required="required"><label
+						class="ms-2" for="quantidade">Temperatura</label>
+				</div>
+				<div class="form-floating mb-3 col-12 col-md-6">
+					<input type="date" class="form-control" id="validade"
+						name="validade" th:value="${produto.validade}"
+						aria-describedby="validade" required="required"> <label
+						for="validade" class="ms-2">Validade</label>
+				</div>
+				<div class="form-floating mb-3 col-12 col-md-6">
+					<select class="form-select" name="fornecedor"
+						aria-label="fornecedor" required="required">
+						<option value="NAO_DECLARADO" selected></option>
+						<option th:each="fornecedor : ${fornecedores}"
+							th:text="${fornecedor.nome}" th:value="${fornecedor.id}"
+							th:selected="${fornecedor.nome == produto.fornecedor.nome}">Nome</option>
+					</select> <label class="ms-2" for="fornecedor">Fornecedor</label>
+				</div>
+				<div class="form-floating mb-3 col-12 col-md-6">
+					<select class="form-select" name="tipo" aria-label="tipo"
+						required="required">
+						<option value="CONSUMO"
+							th:selected="${produto.tipo.name() == 'CONSUMO'}">Pronto
+							para consumo</option>
+						<option value="MATERIA_PRIMA"
+							th:selected="${produto.tipo.name() == 'MATERIA_PRIMA'}">Materia
+							Prima</option>
+						<option value="OUTROS"
+							th:selected="${produto.tipo.name() == 'OUTROS'}">Outros</option>
+					</select> <label class="ms-2" for="tipo">Tipo de produto</label>
 				</div>
 				<input type="hidden" id="id" name="id" th:value="${produto.id}">
-				<button type="submit" class="btn btn-primary">Adicionar</button>
+				<button type="submit" class="btn btn-primary">Editar</button>
 			</div>
 		</form>
 

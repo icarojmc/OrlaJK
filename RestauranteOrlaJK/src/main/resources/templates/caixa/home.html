@@ -16,7 +16,7 @@
 						th:href="'#collapse'+${mesa.id}" role="button"
 						aria-expanded="false" aria-controls="collapse"> Mesa nº <span
 						th:text="${mesa.numeroDaMesa}">#</span><span
-						th:text="${mesa.setor}">#</span>
+						th:text="${mesa.setor.nome}">#</span>
 					</a>
 				</div>
 				<div class="collapse" th:id="'collapse'+${mesa.id}">

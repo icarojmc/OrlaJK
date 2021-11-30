@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Agenda</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+	crossorigin="anonymous">
+</head>
+<body>
+
+	<div th:replace="~{base :: menu}"></div>
+
+	<div class="container">
+
+		<div th:replace="~{base :: menuAdm('Adicionar Registro')}"></div>
+		<div class="row">
+			<div class="mb-4 mt-2 col-4 d-grid">
+				<a href="/administracao/agenda"
+					class="btn btn-outline-primary me-md-2" type="button">Voltar</a>
+			</div>
+		</div>
+
+		<form action="/administracao/agenda/novo" method="POST">
+			<div class="row">
+				<div class="form-floating mb-3 col-12 col-md-6">
+					<input type="text" class="form-control" id="funcionario"
+						name="funcionario" aria-describedby="funcionario"
+						required="required"> <label for="funcionario"
+						class="form-label">Funcionário</label>
+				</div>
+				<div class="form-floating mb-3 col-12 col-md-6">
+					<input type="datetime-local" class="form-control" id="entrada"
+						name="entrada" aria-describedby="entrada" required="required"
+						onchange="document.getElementById('saida').value = this.value;">
+					<label for="entrada" class="form-label">Entrada</label>
+				</div>
+				<div class="form-floating mb-3 col-12 col-md-6">
+					<input type="datetime-local" class="form-control" id="saida"
+						name="saida" aria-describedby="saida" required="required">
+					<label for="saida" class="form-label">Saída</label>
+				</div>
+				<div class="form-floating mb-3 col-12 col-md-6">
+					<select class="form-select" name="local" id="local"
+						aria-label="local" required="required">
+						<option value="RECEPCAO" selected>Recepção</option>
+						<option value="SALAO">Salão</option>
+						<option value="COZINHA">Cozinha</option>
+						<option value="CAIXA">Caixa</option>
+						<option value="ADMINISTRACAO">Administração</option>
+						<option value="ESTOQUE">Estoque</option>
+					</select> <label for="local" class="form-label">Local de trabalho</label>
+				</div>
+				<button type="submit" class="btn btn-primary">Adicionar</button>
+			</div>
+		</form>
+	</div>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+		crossorigin="anonymous"></script>
+</body>
+</html>

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.icaroelucas.restauranteorlajk.entities.mesa.repository.MesaRepository;
+import com.icaroelucas.restauranteorlajk.entities.setor.model.Setor;
+import com.icaroelucas.restauranteorlajk.entities.setor.repository.SetorRepository;
 import com.icaroelucas.restauranteorlajk.salao.service.salao.SalaoService;
 
 @Controller
@@ -18,18 +20,21 @@ public class SalaoController {
 	@Autowired
 	MesaRepository mesaRepository;
 	
+	@Autowired
+	SetorRepository setorRepository;
+	
 	SalaoService salao = new SalaoService();
 
 	@GetMapping("")
 	public String home(Model model) {
-		model = salao.iniciar(mesaRepository)
+		model = salao.iniciar(mesaRepository, setorRepository)
 				.popularModel(model);
 		return "mesas/home";
 	}
 	
 	@GetMapping("/setor")
-	public String mesasPorSetor(Model model, @RequestParam String setor) {
-		model = salao.iniciar(mesaRepository)
+	public String mesasPorSetor(Model model, @RequestParam Setor setor) {
+		model = salao.iniciar(mesaRepository, setorRepository)
 				.popularModel(model, setor);
 		return "mesas/home";
 	}

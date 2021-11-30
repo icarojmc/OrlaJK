@@ -39,6 +39,17 @@ public class GestaoService {
 
 		return model;
 	}
+	
+	public Model popularModel(Model model, long mesaId, String tipo) {
+		
+		Pedido pedido = buscarPedido(mesaId);
+		List<Alimento> cardapio = alimentoService.buscaCardapio(tipo);
+
+		model.addAttribute("pedido", pedido);
+		model.addAttribute("cardapio", cardapio);
+
+		return model;
+	}
 
 	private Pedido buscarPedido(long mesaId) {
 		Pedido pedido = new Pedido();
@@ -91,5 +102,7 @@ public class GestaoService {
 	public void entregaPedido(long id, PedidoRepository pedidoRepository) {
 		pedidoService.entregarPedido(id, pedidoRepository);
 	}
+
+	
 
 }

@@ -14,10 +14,15 @@
 
 	<div class="container">
 
-		<div th:replace="~{base :: menuAdm}"></div>
-		<h1 class="mt-2 mb-2">Editar cardápio:</h1>
-		<a type="button" class="btn btn-outline-primary mb-2"
-			href="/administracao/cardapio/novo">Novo alimento</a>
+		<div th:replace="~{base :: menuAdm('Cardápio')}"></div>
+
+		<div class="row">
+			<div class="mb-4 mt-2 col-4 d-grid">
+				<a type="button" class="btn btn-outline-primary mb-2"
+					href="/administracao/cardapio/novo">Novo alimento</a>
+			</div>
+		</div>
+
 
 		<table class="table">
 			<thead>
@@ -43,9 +48,17 @@
 								type="button" data-bs-toggle="dropdown" aria-expanded="false">
 								Produtos</button>
 							<ul class="dropdown-menu">
-							<li th:if="${alimento.produtos} != null" th:each="produto : ${alimento.produtos}"><a class="dropdown-item" th:href="@{/administracao/cardapio/removeproduto(alimentoid=${alimento.id}, produtoid=${produto.id})}"> <span th:text="${produto.nome}">produto</span> - <span th:text="${produto.quantidade}">###</span> <span th:text="${produto.medida}">U</span> </a></li>
-							<li><hr class="dropdown-divider"></li>
-							<li><a class="dropdown-item" th:href="@{/administracao/cardapio/adicionaproduto(id=${alimento.id})}">Adiciona</a></li>
+								<li th:if="${alimento.produtos} != null"
+									th:each="produto : ${alimento.produtos}"><a
+									class="dropdown-item"
+									th:href="@{/administracao/cardapio/removeproduto(alimentoid=${alimento.id}, produtoid=${produto.id})}">
+										<span th:text="${produto.nome}">produto</span> - <span
+										th:text="${produto.quantidade}">###</span> <span
+										th:text="${produto.medida}">U</span>
+								</a></li>
+								<li><hr class="dropdown-divider"></li>
+								<li><a class="dropdown-item"
+									th:href="@{/administracao/cardapio/adicionaproduto(id=${alimento.id})}">Adiciona</a></li>
 							</ul>
 						</div></td>
 					<td>

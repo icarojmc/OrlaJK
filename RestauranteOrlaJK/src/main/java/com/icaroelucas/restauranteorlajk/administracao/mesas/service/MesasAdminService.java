@@ -9,6 +9,8 @@ import com.icaroelucas.restauranteorlajk.administracao.mesas.dto.EdicaoMesaDTO;
 import com.icaroelucas.restauranteorlajk.administracao.mesas.dto.NovaMesaDTO;
 import com.icaroelucas.restauranteorlajk.entities.mesa.model.Mesa;
 import com.icaroelucas.restauranteorlajk.entities.mesa.repository.MesaRepository;
+import com.icaroelucas.restauranteorlajk.entities.setor.model.Setor;
+import com.icaroelucas.restauranteorlajk.entities.setor.repository.SetorRepository;
 
 
 public class MesasAdminService {
@@ -29,9 +31,19 @@ public class MesasAdminService {
 		return model;
 	}
 	
-	public Model popularModel(Model model, long id) {
-		model.addAttribute("mesas", buscaMesa(id));
+	public Model popularModel(Model model, long id, SetorRepository setorRepository) {
+		model.addAttribute("setores", buscaSetor(setorRepository));
+		model.addAttribute("mesa", buscaMesa(id));
 		return model;
+	}
+	
+	public Model popularModel(Model model, SetorRepository setorRepository) {
+		model.addAttribute("setores", buscaSetor(setorRepository));
+		return model;
+	}
+
+	private List<Setor> buscaSetor(SetorRepository setorRepository) {
+		return setorRepository.findAll();
 	}
 
 	protected List<Mesa> buscaMesas() {

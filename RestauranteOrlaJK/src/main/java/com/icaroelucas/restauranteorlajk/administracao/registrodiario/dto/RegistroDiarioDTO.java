@@ -20,7 +20,7 @@ public RegistroDiario toRegistro(Mesa mesa) {
 		else {
 			registro.setCliente("[ Cliente não definido ]");
 		}
-		registro.setMesa("[ Mesa: " + mesa.getNumeroDaMesa() + " - Setor: " + mesa.getSetor() + " ]");
+		registro.setMesa("[ Mesa: " + mesa.getNumeroDaMesa() + " - Setor: " + mesa.getSetor().getNome() + " ]");
 		this.pedidos = "";
 		for (Pedido pedido : mesa.getPedidos()) {
 			this.pedidos += "[ Pedido: " + pedido.getId() + " - Situacao: " + pedido.getSituacao();

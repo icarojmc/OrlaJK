@@ -14,9 +14,38 @@
 
 	<div class="container">
 
-		<div th:replace="~{base :: menuAdm}"></div>
-		<h1 class="mt-2 mb-2">Registros diários:</h1>
-		
+		<div th:replace="~{base :: menuAdm('Registros diários')}"></div>
+
+		<form action="/administracao/registro/dia" method="GET">
+			<div class="row">
+				<div class="form-floating mb-3 col-12 col-md-4 mt-2">
+					<input type="date" class="form-control" id="dia" name="dia"
+						th:value="${dia}"> <label for="floatingInput"
+						class="form-label ms-2">Escolha a data</label>
+				</div>
+				<div class="col-12">
+					<div class="row">
+						<div class="mb-4 mt-2 col-4 d-grid">
+							<button type="submit" class="btn btn-outline-primary">Buscar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+
+		<div th:if="${totalPaginas > 1}">
+			<nav aria-label="navegacao">
+				<ul class="pagination justify-content-center mt-4">
+					</li>
+					<li th:each="pagina : ${#numbers.sequence(1, totalPaginas)}"
+						th:class="${pagina == nPagina} ? 'page-item active' : 'page-item'"><a
+						class="page-link"
+						th:href="@{/administracao/registro/pagina(dia=${dia}, nPagina=${pagina})}"
+						th:text="${pagina}">#</a></li>
+				</ul>
+			</nav>
+		</div>
+
 		<table class="table">
 			<thead>
 				<tr>

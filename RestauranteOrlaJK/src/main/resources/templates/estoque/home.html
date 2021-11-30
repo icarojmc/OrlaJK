@@ -8,12 +8,14 @@
 	<div class="container">
 		<div class="row">
 			<h1 class="col-8">Controle do estoque:</h1>
+		</div>
+
+		<div class="row">
 			<div class="mb-4 mt-2 col-4 d-grid">
 				<a type="button" class="btn btn-outline-primary"
 					href="/estoque/novo">Adicionar produto</a>
 			</div>
 		</div>
-
 		<table class="table">
 			<thead>
 				<tr>
@@ -26,25 +28,25 @@
 			</thead>
 			<tbody>
 				<div th:if="${produtos} != null">
-				<tr th:each="produto : ${produtos}" th:if="${produto.disponivel}">
-					<th scope="row" th:text="${produto.id}">#</th>
-					<td th:text="${produto.nome}">Nome</td>
-					<td th:text="${produto.validade}">validade</td>
-					<td><span th:text="${produto.quantidade}">#</span> <span
-						th:text="${produto.medida}">Medida</span></td>
-					<td>
-						<div class="btn-group" role="group" aria-label="ações do item">
-							<a type="button" class="btn btn-outline-primary btn-sm"
-								th:href="@{/estoque/edita(id=${produto.id})}">Editar</a> <a
-								type="button" class="btn btn-outline-primary btn-sm"
-								th:href="@{/estoque/exclui(id=${produto.id})}">Excluir</a>
-						</div>
-					</td>
-				</tr>
+					<tr th:each="produto : ${produtos}" th:if="${produto.disponivel}">
+						<th scope="row" th:text="${produto.id}">#</th>
+						<td th:text="${produto.nome}">Nome</td>
+						<td th:text="${produto.validade}">validade</td>
+						<td><span th:text="${produto.quantidade}">#</span> <span
+							th:text="${produto.medida}">Medida</span></td>
+						<td>
+							<div class="btn-group" role="group" aria-label="ações do item">
+								<a type="button" class="btn btn-outline-primary btn-sm"
+									th:href="@{/estoque/edita(id=${produto.id})}">Editar</a> <a
+									type="button" class="btn btn-outline-primary btn-sm"
+									th:href="@{/estoque/exclui(id=${produto.id})}">Excluir</a>
+							</div>
+						</td>
+					</tr>
 				</div>
 			</tbody>
 		</table>
-
+	</div>
 	</div>
 
 	<script

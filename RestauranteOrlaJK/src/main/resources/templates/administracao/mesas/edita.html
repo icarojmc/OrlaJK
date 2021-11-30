@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Estoque</title>
+<title>Mesa</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -14,34 +14,38 @@
 	<div th:replace="~{base :: menu}"></div>
 
 	<div class="container">
+
+		<div th:replace="~{base :: menuAdm('Editar mesa')}"></div>
+
 		<div class="row">
-			<h1 class="col-8">Editar mesa:</h1>
-			<div class="dropdown mb-4 mt-2 col-4"></div>
+			<div class="mb-4 mt-2 col-4 d-grid">
+				<a href="/administracao/mesas"
+					class="btn btn-outline-primary me-md-2" type="button">Voltar</a>
+			</div>
 		</div>
 
 		<form action="/administracao/mesas/edita" method="POST">
 			<div class="row">
-				<div class="mb-3 col-12">
-					<label for="numeroDaMesa" class="form-label">Número da mesa</label> <input
-						type="number" class="form-control" id="numeroDaMesa" name="numeroDaMesa"
-						th:value="${mesa.numeroDaMesa}" aria-describedby="numeroDaMesa" required="required">
+				<div class="form-floating mb-3 col-12 col-md-6">
+					<input type="number" class="form-control" id="numeroDaMesa"
+						name="numeroDaMesa" th:value="${mesa.numeroDaMesa}"
+						aria-describedby="numeroDaMesa" required="required"> <label
+						for="numeroDaMesa" class="form-label ms-2">Número da mesa</label>
 				</div>
-				<div class="mb-3 col-8">
-					<label for="nDeCadeiras" class="form-label">Cadeiras</label> <input
-						type="number" class="form-control" id="nDeCadeiras"
+				<div class="form-floating mb-3 col-12 col-md-6">
+					<input type="number" class="form-control" id="nDeCadeiras"
 						name="nDeCadeiras" th:value="${mesa.nDeCadeiras}"
-						aria-describedby="nDeCadeiras" required="required">
+						aria-describedby="nDeCadeiras" required="required"> <label
+						for="nDeCadeiras" class="form-label ms-2">Cadeiras</label>
 				</div>
-				<div class="mb-3 col-4">
-				<label for="setor" class="form-label">Setor</label>
-					<select class="form-select" id="setor" th:name="setor" aria-label="setor" required="required">
-						<option th:value="A" th:selected="${mesa.setor.name() == 'A'}">A</option>
-						<option th:value="B" th:selected="${mesa.setor.name() == 'B'}">B</option>
-						<option th:value="C" th:selected="${mesa.setor.name() == 'C'}">C</option>
-						<option th:value="D" th:selected="${mesa.setor.name() == 'D'}">D</option>
-						<option th:value="E" th:selected="${mesa.setor.name() == 'E'}">E</option>
-						<option th:value="F" th:selected="${mesa.setor.name() == 'F'}">F</option>
-					</select>
+				<div class="form-floating mb-3 col-12 col-md-6">
+
+					<select class="form-select" id="setor" th:name="setor"
+						aria-label="setor" required="required">
+						<option th:each="setor : ${setores}" th:text="${setor.nome}"
+							th:value="${setor.id}"
+							th:select="${setor.nome == mesa.setor.nome}">#</option>
+					</select> <label for="setor" class="form-label ms-2">Setor</label>
 				</div>
 				<input type="hidden" id="id" name="id" th:value="${mesa.id}">
 				<button type="submit" class="btn btn-primary">Editar</button>

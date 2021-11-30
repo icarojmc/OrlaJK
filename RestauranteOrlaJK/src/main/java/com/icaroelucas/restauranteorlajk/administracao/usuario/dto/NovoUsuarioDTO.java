@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.icaroelucas.restauranteorlajk.entities.usuario.model.Perfil;
 import com.icaroelucas.restauranteorlajk.entities.usuario.model.Usuario;
 
 public class NovoUsuarioDTO {
@@ -14,15 +15,13 @@ public class NovoUsuarioDTO {
 	private String senha;
 	private List<String> perfil;
 
-	public Usuario toUsuario() {
+	public Usuario toUsuario(List<Perfil> perfis) {
 		Usuario usuario = new Usuario();
 		usuario.setNome(this.nome);
 		usuario.setUsuario(this.usuario);
 		usuario.setSenha(new BCryptPasswordEncoder().encode(this.senha));
-		if (perfil != null) {
-			for (String string : perfil) {
-				usuario.adicionaPerfil(string);
-			}
+		if (perfis != null) {
+			usuario.setPerfis(perfis);
 		}
 		return usuario;
 	}

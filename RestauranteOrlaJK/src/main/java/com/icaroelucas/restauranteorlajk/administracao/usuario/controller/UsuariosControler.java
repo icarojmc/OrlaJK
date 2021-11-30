@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.icaroelucas.restauranteorlajk.administracao.usuario.dto.EdicaoUsuarioDTO;
+import com.icaroelucas.restauranteorlajk.administracao.usuario.dto.NovaSenhaDTO;
 import com.icaroelucas.restauranteorlajk.administracao.usuario.dto.NovoUsuarioDTO;
 import com.icaroelucas.restauranteorlajk.administracao.usuario.service.UsuarioService;
 import com.icaroelucas.restauranteorlajk.entities.usuario.repository.PerfilRepository;
@@ -67,6 +69,29 @@ public class UsuariosControler {
 	public RedirectView deletaUsuario(Model model, @RequestParam long id) {
 		usuarioService.deletaUsuario(id);
 		return new RedirectView("");
+	}
+
+	@GetMapping("/senha")
+	public Object trocaSenha(Model model, @RequestParam long id) {
+		model.addAttribute("id", id);
+		return "administracao/usuarios/senha";
+	}
+
+	@PostMapping("/senha")
+	public Object trocadaSenha(Model model, NovaSenhaDTO novaSenhaDTO) {
+		try {
+			if (usuarioService.senhasIguais(novaSenhaDTO)) {
+				usuarioService.trocaDeSenha(novaSenhaDTO);
+				return new RedirectView("?pgid=1");
+			} else {
+				model.addAttribute("id", novaSenhaDTO.getId());
+				model.addAttribute("alert", true);
+				return "administracao/usuarios/senha";
+			}
+		} catch (NoSuchElementException e) {
+			System.out.println(e);
+		}
+		return new RedirectView("?pgid=2");
 	}
 
 }

@@ -16,37 +16,52 @@
 
 	<div class="container">
 
-		<div class="card" style="width: 18rem;">
-			<div class="card-header">Itens do pedido:</div>
-			<ul class="list-group list-group-flush">
-				<div th:if="${pedido.alimentos} != null"
-					th:each="item : ${pedido.alimentos}">
-					<li class="list-group-item"><a type="button"
-						class="btn btn-outline-primary"
-						th:href="@{/pedidos/removeAlimento(id=${item.id})}">remover</a>
-						<span th:text="${item.nome}">nome</span></li>
+		<a href="/mesas" class="btn btn-outline-primary mb-3" type="button"
+			style="width: 18rem;">Voltar</a>
+		<div class="row justify-content-between">
+			<div class="col-4">
+				<div class="card" style="width: 18rem;">
+					<div class="card-header">Itens do pedido:</div>
+					<ul class="list-group list-group-flush">
+						<div th:if="${pedido.alimentos} != null"
+							th:each="item : ${pedido.alimentos}">
+							<li class="list-group-item"><a type="button"
+								class="btn btn-outline-primary"
+								th:href="@{/pedidos/removeAlimento(id=${item.id})}">remover</a>
+								<span th:text="${item.nome}">nome</span></li>
+						</div>
+					</ul>
+					<div th:if="${pedido.observacao != null}">
+						<h6 class="card-subtitle m-2 text-muted"
+							th:text="${pedido.observacao}"></h6>
+					</div>
+					<form class="m-2" action="/pedidos/observacao" method="post">
+						<label class="visually-hidden"
+							for="grupodeinformacoessobreaobservacao">Observacao</label> <input
+							type="text" class="form-control" id="observacao"
+							name="observacao" placeholder="Observacao"> <input
+							type="hidden" name="id" th:value="${pedido.id}">
+						<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+							<button type="submit" class="btn btn-outline-secondary m-2">Adicionar
+								observação</button>
+						</div>
+
+					</form>
+					<a type="button" class="btn btn-outline-primary"
+						th:href="@{/pedidos/finaliza}">Finalizar pedido</a>
 				</div>
-			</ul>
-			<div th:if="${pedido.observacao != null}">
-			<h6 class="card-subtitle m-2 text-muted" th:text="${pedido.observacao}"></h6>
+
 			</div>
-			<form class="m-2" action="/pedidos/observacao" method="post">
-				<label class="visually-hidden"
-					for="grupodeinformacoessobreaobservacao">Observacao</label> <input
-					type="text" class="form-control" id="observacao" name="observacao"
-					placeholder="Observacao"> <input
-					type="hidden" name="id" th:value="${pedido.id}">
-				<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-					<button type="submit" class="btn btn-outline-secondary m-2">Adicionar
-						observação</button>
+			<div class="col-12 col-lg-6 col-xl-5 align-self-end mt-4">
+				<div class="btn-group" role="group" aria-label="Filtro de itens">
+					<a class="btn btn-outline-primary" th:href="@{/pedidos/filtro(id=${pedido.id})}" role="button">TODOS</a>
+					<a class="btn btn-outline-primary" th:href="@{/pedidos/filtro(id=${pedido.id}, tipo='ENTRADA')}" role="button">ENTRADA</a>
+					<a class="btn btn-outline-primary" th:href="@{/pedidos/filtro(id=${pedido.id}, tipo='PRINCIPAL')}" role="button">PRINCIPAL</a>
+					<a class="btn btn-outline-primary" th:href="@{/pedidos/filtro(id=${pedido.id}, tipo='SOBREMESA')}" role="button">SOBREMESA</a>
+					<a class="btn btn-outline-primary" th:href="@{/pedidos/filtro(id=${pedido.id}, tipo='BEBIDA')}" role="button">BEBIDA</a>
 				</div>
-
-			</form>
-			<a type="button" class="btn btn-outline-primary"
-				th:href="@{/pedidos/finaliza}">Finalizar
-				pedido</a>
+			</div>
 		</div>
-
 		<table class="table">
 			<thead>
 				<tr>

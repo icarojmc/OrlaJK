@@ -1,8 +1,12 @@
 package com.icaroelucas.restauranteorlajk.administracao.registrodiario.service;
 
-import java.util.List;
+import java.time.LocalDate;
 
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.ui.Model;
 
 import com.icaroelucas.restauranteorlajk.administracao.registrodiario.dto.RegistroDiarioDTO;
@@ -24,13 +28,18 @@ public class RegistroDiarioService {
 		return registroDiarioRepository != null;
 	}
 
-	public Model popularModel(Model model) {
-		model = model.addAttribute("registros", buscaRegistros());
+	public Model popularModel(Model model, LocalDate dia, int nPagina) {
+		Page<RegistroDiario> page = buscaRegistros(dia, nPagina);
+		model.addAttribute("registros", page);
+		model.addAttribute("nPagina", nPagina);
+		model.addAttribute("totalPaginas", page.getTotalPages());
+		model.addAttribute("dia", dia);
 		return model;
 	}
 
-	protected List<RegistroDiario> buscaRegistros() {
-		return registroDiarioRepository.findAll();
+	protected Page<RegistroDiario> buscaRegistros(LocalDate dia, int nPagina) {
+		Pageable pageable = PageRequest.of(nPagina -1, 10, Sort.by("dataDoRegistro").descending());
+		return registroDiarioRepository.findAllByDataDoRegistro(pageable, dia);
 	}
 
 	public void deletaRegistro(long id) {

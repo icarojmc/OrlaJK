@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.icaroelucas.restauranteorlajk.entities.fornecedor.repository.FornecedorRepository;
 import com.icaroelucas.restauranteorlajk.entities.produto.model.Produto;
 import com.icaroelucas.restauranteorlajk.entities.produto.repository.ProdutoRepository;
 import com.icaroelucas.restauranteorlajk.estoque.dto.EdicaoProdutoDTO;
@@ -25,6 +26,9 @@ public class EstoqueController {
 	@Autowired
 	ProdutoRepository produtoRepository;
 	
+	@Autowired
+	FornecedorRepository fornecedorRepository;
+	
 	EstoqueService estoqueService = new EstoqueService();
 
 	@GetMapping("")
@@ -34,7 +38,8 @@ public class EstoqueController {
 	}
 
 	@GetMapping("/novo")
-	public String novoAdiciona() {
+	public String novoAdiciona(Model model) {
+		model = estoqueService.popularModel(model, fornecedorRepository);
 		return "estoque/novo";
 	}
 
@@ -48,7 +53,7 @@ public class EstoqueController {
 	public Object edita(Model model, @RequestParam String id) {
 		try {
 			Produto produto = estoqueService.editaProduto(model, id);
-			estoqueService.popularModel(model, produto);
+			estoqueService.popularModel(model, produto, fornecedorRepository);
 			return "estoque/edita";
 		} catch (NoSuchElementException e) {
 			System.out.println(e);

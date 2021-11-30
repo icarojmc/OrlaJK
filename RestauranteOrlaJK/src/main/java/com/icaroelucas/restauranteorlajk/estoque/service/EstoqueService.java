@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.icaroelucas.restauranteorlajk.cozinha.dto.UsaProdutoDTO;
+import com.icaroelucas.restauranteorlajk.entities.fornecedor.model.Fornecedor;
+import com.icaroelucas.restauranteorlajk.entities.fornecedor.repository.FornecedorRepository;
 import com.icaroelucas.restauranteorlajk.entities.produto.model.Produto;
 import com.icaroelucas.restauranteorlajk.entities.produto.repository.ProdutoRepository;
 import com.icaroelucas.restauranteorlajk.estoque.dto.EdicaoProdutoDTO;
@@ -33,8 +35,17 @@ public class EstoqueService {
 		return model;
 	}
 	
-	public Model popularModel(Model model, Object object) {
+	public Model popularModel(Model model, Object object, FornecedorRepository fornecedorRepository) {
+		model.addAttribute("fornecedores", localizarFornecedores(fornecedorRepository));
 		return model.addAttribute("produto", object);
+	}
+	
+	public Model popularModel(Model model, FornecedorRepository fornecedorRepository) {
+		return model.addAttribute("fornecedores", localizarFornecedores(fornecedorRepository));
+	}
+
+	private List<Fornecedor> localizarFornecedores(FornecedorRepository fornecedorRepository) {
+		return fornecedorRepository.findAll();
 	}
 
 	public List<Produto> localizaProdutos(){
@@ -64,5 +75,7 @@ public class EstoqueService {
 		produto = produtoDTO.subtrairDoProduto(produto);
 		produtoRepository.save(produto);
 	}
+
+	
 
 }

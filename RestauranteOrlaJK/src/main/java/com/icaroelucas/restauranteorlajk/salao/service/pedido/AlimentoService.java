@@ -3,6 +3,7 @@ package com.icaroelucas.restauranteorlajk.salao.service.pedido;
 import java.util.List;
 
 import com.icaroelucas.restauranteorlajk.entities.alimento.model.Alimento;
+import com.icaroelucas.restauranteorlajk.entities.alimento.model.Tipo;
 import com.icaroelucas.restauranteorlajk.entities.alimento.repository.AlimentoRepository;
 
 public class AlimentoService {
@@ -22,10 +23,16 @@ public class AlimentoService {
 	public List<Alimento> buscaCardapio() {
 		return alimentoRepository.findAll();
 	}
+	
+	public List<Alimento> buscaCardapio(String tipo) {
+		return alimentoRepository.findAllByTipo(Tipo.valueOf(tipo));
+	}
 
 	public Alimento buscaAlimento(long id) {
 		return alimentoRepository.findById(id).get();
 	}
+
+	
 	
 	
 

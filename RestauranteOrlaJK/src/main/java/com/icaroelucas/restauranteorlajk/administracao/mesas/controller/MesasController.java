@@ -13,6 +13,7 @@ import com.icaroelucas.restauranteorlajk.administracao.mesas.dto.EdicaoMesaDTO;
 import com.icaroelucas.restauranteorlajk.administracao.mesas.dto.NovaMesaDTO;
 import com.icaroelucas.restauranteorlajk.administracao.mesas.service.MesasAdminService;
 import com.icaroelucas.restauranteorlajk.entities.mesa.repository.MesaRepository;
+import com.icaroelucas.restauranteorlajk.entities.setor.repository.SetorRepository;
 
 @Controller
 @RequestMapping("/administracao/mesas")
@@ -20,6 +21,9 @@ public class MesasController {
 
 	@Autowired
 	MesaRepository mesaRepository;
+	
+	@Autowired
+	SetorRepository setorRepository;
 	
 	MesasAdminService mesaService = new MesasAdminService();
 
@@ -32,7 +36,8 @@ public class MesasController {
 	}
 
 	@GetMapping("/novo")
-	public String adicionaNovaMesa() {
+	public String adicionaNovaMesa(Model model) {
+		model = mesaService.popularModel(model, setorRepository);
 		return "administracao/mesas/novo";
 	}
 
@@ -44,7 +49,7 @@ public class MesasController {
 
 	@GetMapping("/edita")
 	public String editaMesa(Model model, @RequestParam long id) {
-		model = mesaService.popularModel(model, id);
+		model = mesaService.popularModel(model, id, setorRepository);
 		return "administracao/mesas/edita";
 	}
 

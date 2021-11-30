@@ -1,21 +1,21 @@
 package com.icaroelucas.restauranteorlajk.administracao.mesas.dto;
 
 import com.icaroelucas.restauranteorlajk.entities.mesa.model.Mesa;
-import com.icaroelucas.restauranteorlajk.entities.mesa.model.Setor;
+import com.icaroelucas.restauranteorlajk.entities.setor.model.Setor;
 
 public class EdicaoMesaDTO {
 
 	private String id;
 	private String numeroDaMesa;
 	private String nDeCadeiras;
-	private String setor;
+	private Setor setor;
 	
 	public Mesa toMesa() {
 		Mesa mesa = new Mesa();
 		mesa.setId(Long.parseLong(id));
 		mesa.setnDeCadeiras(Integer.parseInt(nDeCadeiras));
 		mesa.setNumeroDaMesa(Integer.parseInt(numeroDaMesa));
-		mesa.setSetor(Setor.valueOf(setor));
+		mesa.setSetor(setor);
 		return mesa;
 	}
 	
@@ -31,10 +31,10 @@ public class EdicaoMesaDTO {
 	public void setnDeCadeiras(String nDeCadeiras) {
 		this.nDeCadeiras = nDeCadeiras;
 	}
-	public String getSetor() {
+	public Setor getSetor() {
 		return setor;
 	}
-	public void setSetor(String setor) {
+	public void setSetor(Setor setor) {
 		this.setor = setor;
 	}
 	public String getId() {

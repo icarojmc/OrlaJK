@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.icaroelucas.restauranteorlajk.entities.mesa.model.Mesa;
-import com.icaroelucas.restauranteorlajk.entities.mesa.model.Setor;
+import com.icaroelucas.restauranteorlajk.entities.setor.model.Setor;
 
 @Repository
 public interface MesaRepository extends JpaRepository<Mesa, Long>{

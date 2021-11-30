@@ -2,23 +2,33 @@ package com.icaroelucas.restauranteorlajk.estoque.dto;
 
 import java.time.LocalDate;
 
+import com.icaroelucas.restauranteorlajk.entities.fornecedor.model.Fornecedor;
 import com.icaroelucas.restauranteorlajk.entities.produto.model.Medida;
 import com.icaroelucas.restauranteorlajk.entities.produto.model.Produto;
+import com.icaroelucas.restauranteorlajk.entities.produto.model.TipoDeProduto;
 
 public class NovoProdutoDTO {
 
 	private String nome;
-	private String quantidade;
+	private float quantidade;
 	private String validade;
+	private String fabricante;
+	private Fornecedor fornecedor;
+	private float temperatura;
 	private String medida;
+	private String tipo;
 	
 	public Produto toProduto() {
 		LocalDate data = LocalDate.parse(validade);
 		Produto produto = new Produto();
 		produto.setNome(nome);
-		produto.setQuantidade(Float.parseFloat(quantidade));
+		produto.setQuantidade(quantidade);
 		produto.setValidade(data);
 		produto.setMedida(Medida.valueOf(medida));
+		produto.setTipo(TipoDeProduto.valueOf(tipo));
+		produto.setFabricante(fabricante);
+		produto.setFornecedor(fornecedor);
+		produto.setTemperatura(temperatura);
 		produto.setDisponivel(true);
 		return produto;
 	}
@@ -31,11 +41,11 @@ public class NovoProdutoDTO {
 		this.nome = nome;
 	}
 
-	public String getQuantidade() {
+	public float getQuantidade() {
 		return quantidade;
 	}
 
-	public void setQuantidade(String quantidade) {
+	public void setQuantidade(float quantidade) {
 		this.quantidade = quantidade;
 	}
 
@@ -53,6 +63,38 @@ public class NovoProdutoDTO {
 
 	public void setMedida(String medida) {
 		this.medida = medida;
+	}
+
+	public String getFabricante() {
+		return fabricante;
+	}
+
+	public void setFabricante(String fabricante) {
+		this.fabricante = fabricante;
+	}
+
+	public Fornecedor getFornecedor() {
+		return fornecedor;
+	}
+
+	public void setFornecedor(Fornecedor fornecedor) {
+		this.fornecedor = fornecedor;
+	}
+
+	public float getTemperatura() {
+		return temperatura;
+	}
+
+	public void setTemperatura(float temperatura) {
+		this.temperatura = temperatura;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 

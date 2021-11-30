@@ -6,33 +6,42 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.icaroelucas.restauranteorlajk.entities.mesa.model.Mesa;
-import com.icaroelucas.restauranteorlajk.entities.mesa.model.Setor;
 import com.icaroelucas.restauranteorlajk.entities.mesa.repository.MesaRepository;
+import com.icaroelucas.restauranteorlajk.entities.setor.model.Setor;
+import com.icaroelucas.restauranteorlajk.entities.setor.repository.SetorRepository;
 
 @Service
 public class SalaoService {
 
 	private MesaRepository mesaRepository = null;
+	private SetorRepository setorRepository = null;
 
-	public SalaoService iniciar(MesaRepository mesaRepository) {
+	public SalaoService iniciar(MesaRepository mesaRepository, SetorRepository setorRepository) {
 		if (!foiIniciado()) {
 			this.mesaRepository = mesaRepository;
+			this.setorRepository = setorRepository;
 		}
 		return this;
 	}
 
 	private boolean foiIniciado() {
-		return mesaRepository != null;
+		return mesaRepository != null && setorRepository != null;
 	}
 
 	public Model popularModel(Model model) {
 		List<Mesa> listaDeMesas = mesaRepository.findAllByOcupada(true);
+		model.addAttribute("setores", buscarSetores());
 		model.addAttribute("mesas", listaDeMesas);
 		return model;
 	}
 
-	public Model popularModel(Model model, String setor) {
-		List<Mesa> listaDeMesas = mesaRepository.findAllByOcupadaAndSetor(true, Setor.valueOf(setor));
+	private List<Setor> buscarSetores() {
+		return setorRepository.findAll();
+	}
+
+	public Model popularModel(Model model, Setor setor) {
+		List<Mesa> listaDeMesas = mesaRepository.findAllByOcupadaAndSetor(true, setor);
+		model.addAttribute("setores", buscarSetores());
 		return model.addAttribute("mesas", listaDeMesas);
 	}
 	

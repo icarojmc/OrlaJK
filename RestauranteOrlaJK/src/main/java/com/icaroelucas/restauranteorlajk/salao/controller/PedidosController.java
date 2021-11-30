@@ -39,6 +39,15 @@ public class PedidosController {
 		
 		return "mesas/novopedido";
 	}
+	
+	@GetMapping("/filtro")
+	public String adicionaPedido(Model model, @RequestParam long id, @RequestParam String tipo) {
+		
+		model = gestorPedidoService.iniciar(mesaRepository, alimentoRepository, pedidoRepository)
+				.popularModel(model, id, tipo);
+		
+		return "mesas/novopedido";
+	}
 
 	@GetMapping("/adiciona")
 	public RedirectView adicionaAlimento(@RequestParam long id) {

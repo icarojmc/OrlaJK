@@ -14,9 +14,13 @@
 	<div th:replace="~{base :: menu}"></div>
 
 	<div class="container">
+		<div th:replace="~{base :: menuAdm('Adicionar produto')}"></div>
+
 		<div class="row">
-			<h1 class="col-8">Adiciona produto:</h1>
-			<div class="dropdown mb-4 mt-2 col-4"></div>
+			<div class="mb-4 mt-2 col-4 d-grid">
+				<a href="/administracao/cardapio"
+					class="btn btn-outline-primary me-md-2" type="button">Voltar</a>
+			</div>
 		</div>
 
 		<form action="/administracao/cardapio/adicionaproduto" method="POST">

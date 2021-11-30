@@ -1,5 +1,8 @@
 package com.icaroelucas.restauranteorlajk.administracao.registrodiario.controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +26,27 @@ public class RegistroController {
 	@GetMapping("")
 	public String registro(Model model) {
 
-		model = registroService.iniciar(registroDiarioRepository).popularModel(model);
+		model = registroService.iniciar(registroDiarioRepository).popularModel(model, LocalDate.now(), 1);
+		return "administracao/registro/registro";
+	}
+	
+	@GetMapping("/dia")
+	public String registroDia(Model model, @RequestParam String dia) {
+
+		DateTimeFormatter pattern = DateTimeFormatter.ofPattern("uuuu-MM-dd");
+		LocalDate diaDate = LocalDate.parse(dia, pattern);
+		
+		model = registroService.iniciar(registroDiarioRepository).popularModel(model, diaDate, 1);
+		return "administracao/registro/registro";
+	}
+	
+	@GetMapping("/pagina")
+	public String registro(Model model, @RequestParam String dia, @RequestParam int nPagina) {
+
+		DateTimeFormatter pattern = DateTimeFormatter.ofPattern("uuuu-MM-dd");
+		LocalDate diaDate = LocalDate.parse(dia, pattern);
+		
+		model = registroService.iniciar(registroDiarioRepository).popularModel(model, diaDate, nPagina);
 		return "administracao/registro/registro";
 	}
 
